@@ -23,6 +23,14 @@ html{
     @apply border border-error
 }
 
+hr{
+    @apply border border-base-300
+}
+
 .card{
-    @apply bg-base-100 border border-base-300 shadow-md
+    @apply bg-base-100 border shadow
+}
+
+.card-wrapper{
+    @apply container w-full max-w-7xl p-6 mx-auto
 }

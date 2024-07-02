@@ -2,10 +2,11 @@
 
 namespace App\Livewire\Auth;
 
-use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
+#[Title('Login')]
 class Login extends Component
 {
     #[Validate('required|email|max:255')]
@@ -17,9 +18,11 @@ class Login extends Component
     public function login(): void
     {
         $valid = $this->validate();
-        if (Auth::attempt($valid)) {
-            $this->redirect(route('home', true), navigate: true);
+        if (auth()->attempt($valid)) {
+            request()->session()->regenerate();
+            $this->redirectIntended(route('home'), true);
         }
+        $this->addError('email', 'Password atau email salah.');
     }
 
     public function render()

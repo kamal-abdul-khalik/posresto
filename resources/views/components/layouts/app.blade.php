@@ -9,8 +9,19 @@
         @vite('resources/css/app.css')
     </head>
 
-    <body>
-        {{ $slot }}
+    <body class="min-h-screen bg-base-200">
+        @auth
+
+        @endauth
+
+        @guest
+            <div class="flex flex-col items-center justify-center h-screen">
+                <h1 class="text-4xl font-bold">{{ config('app.name') }}</h1>
+                <div class="p-4">
+                    {{ $slot }}
+                </div>
+            </div>
+        @endguest
     </body>
 
 </html>

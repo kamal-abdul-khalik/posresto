@@ -57,5 +57,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
         $user->assignRole($member);
+
+        $this->call(CategoryMenuSeeder::class);
+        $this->call(MenuSeeder::class);
     }
 }

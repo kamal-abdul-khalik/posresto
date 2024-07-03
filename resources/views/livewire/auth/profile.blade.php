@@ -1,4 +1,4 @@
-<div class="card-wrapper">
+<div class="page-wrapper">
     <div class="max-w-lg mx-auto card">
         <form wire:submit="save" class="card-body">
             <h3 class="card-title">Edit Profile: {{ auth()->user()->name }}</h3>

@@ -6,7 +6,7 @@
 
 html{
     font-family: "Montserrat Alternates", sans-serif;
-    @apply font-normal
+    @apply font-normal scrollbar-hide
 }
 
 .textarea-bordered,
@@ -27,10 +27,22 @@ hr{
     @apply border border-base-300
 }
 
+thead{
+    @apply border-b border-base-300 bg-base-200/50
+}
+
 .card{
     @apply bg-base-100 border shadow
 }
 
-.card-wrapper{
-    @apply container w-full max-w-7xl p-6 mx-auto
+.page-wrapper{
+    @apply container w-full max-w-7xl p-6 mx-auto space-y-6
+}
+
+.modal-box{
+    @apply scrollbar-hide
+}
+
+.table-wrapper{
+    @apply bg-base-100 border border-base-300 overflow-y-auto rounded-md scrollbar-hide whitespace-nowrap
 }

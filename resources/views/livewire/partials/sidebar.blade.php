@@ -1,4 +1,4 @@
-<ul class="min-h-full p-4 space-y-1 border-r menu bg-base-100 text-base-content w-80 border-base-300">
+<ul class="w-64 min-h-full p-4 space-y-1 border-r menu bg-base-100 text-base-content border-base-300">
     <x-user />
     <li>
         <a href="{{ route('home') }}" wire:navigate @class(['active' => Route::is('home')])>
@@ -7,7 +7,7 @@
         </a>
     </li>
     <li>
-        <a href="" wire:navigate @class(['active' => false])>
+        <a href="{{ route('transaction.create') }}" wire:navigate @class(['active' => Route::is('transaction.create')])>
             <x-tabler-file-plus class="size-5" />
             Input Transaksi
         </a>
@@ -22,7 +22,8 @@
                 <li><a href="{{ route('menus.index') }}" wire:navigate @class(['active' => Route::is('menus.index')])>Data Menu</a></li>
                 <li><a href="{{ route('customers.index') }}" wire:navigate @class(['active' => Route::is('customers.index')])>Data
                         Pelanggan</a></li>
-                <li><a href="" wire:navigate @class(['active' => false])>Riwayat Transaksi</a></li>
+                <li><a href="{{ route('transaction.index') }}" wire:navigate @class(['active' => Route::is('transaction.index')])>Riwayat
+                        Transaksi</a></li>
             </ul>
         </details>
     </li>

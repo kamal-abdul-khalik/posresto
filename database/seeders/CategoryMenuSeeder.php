@@ -13,6 +13,19 @@ class CategoryMenuSeeder extends Seeder
      */
     public function run(): void
     {
-        CategoryMenu::factory()->count(10)->create();
+        $categories = collect([
+            'Coffee',
+            'non-Coffee',
+            'Desert',
+            'EsCreams',
+            'Topping',
+        ]);
+
+        $categories->each(function ($category) {
+            CategoryMenu::create([
+                'name' => $category,
+                'slug' => str()->slug($category),
+            ]);
+        });
     }
 }

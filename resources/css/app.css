@@ -35,6 +35,10 @@ thead{
     @apply bg-base-100 border shadow
 }
 
+.card-divider{
+    @apply divide-y-2 divide-base-200/50
+}
+
 .page-wrapper{
     @apply container w-full max-w-7xl p-6 mx-auto space-y-6
 }

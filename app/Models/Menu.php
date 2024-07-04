@@ -29,6 +29,16 @@ class Menu extends Model
         return $this->image ? url('storage', $this->image) : url('empty-image.png');
     }
 
+    public function scopeSearch($query, $search)
+    {
+        return $query->when($search, function ($query) use ($search) {
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhereHas('categoryMenu', function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%");
+                });
+        });
+    }
+
     public function categoryMenu(): BelongsTo
     {
         return $this->belongsTo(CategoryMenu::class);

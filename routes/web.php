@@ -13,6 +13,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/menus', \App\Livewire\Menu\Index::class)->name('menus.index');
     Route::get('/customers', \App\Livewire\Customer\Index::class)->name('customers.index');
+
+    Route::get('/transactions/create', \App\Livewire\Transaction\Actions::class)->name('transaction.create');
+    Route::get('/transactions/index', \App\Livewire\Transaction\Index::class)->name('transaction.index');
+    Route::get('/transactions/{transaction}/edit', \App\Livewire\Transaction\Actions::class)->name('transaction.edit');
 });
 
 Route::middleware('guest')->group(function () {

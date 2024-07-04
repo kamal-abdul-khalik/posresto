@@ -21,12 +21,7 @@ class Index extends Component
     public function render()
     {
         $menus =  Menu::query()
-            ->when($this->search, function ($query) {
-                $query->where('name', 'like', "%{$this->search}%")
-                    ->orWhereHas('categoryMenu', function ($query) {
-                        $query->where('name', 'like', "%{$this->search}%");
-                    });
-            })
+            ->search($this->search)
             ->with('categoryMenu')
             ->latest()
             ->paginate(5);

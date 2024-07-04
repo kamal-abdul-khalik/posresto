@@ -5,10 +5,11 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
+        "masmerise/livewire-toaster": "^2.2",
         "secondnetwork/blade-tabler-icons": "^3.7",
         "spatie/laravel-permission": "^6.9"
     },

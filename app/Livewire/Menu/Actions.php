@@ -9,10 +9,13 @@ use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Masmerise\Toaster\Toastable;
+use Masmerise\Toaster\Toaster;
 
 class Actions extends Component
 {
     use WithFileUploads;
+    use Toastable;
 
     public $showModalForm = false;
     public $image;
@@ -35,8 +38,10 @@ class Actions extends Component
 
         if (isset($this->form->menu)) {
             $this->form->update();
+            $this->success('Menu update successfully');
         } else {
             $this->form->store();
+            $this->success('Menu saved successfully');
         }
         $this->closeMenu();
         $this->dispatch('reload');
@@ -55,6 +60,7 @@ class Actions extends Component
         $menu->delete();
         $menu->image ? Storage::disk('public')->delete($menu->image) : false;
         $this->dispatch('reload');
+        $this->success('Menu deleted successfully');
     }
 
     public function closeMenu(): void

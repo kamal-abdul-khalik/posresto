@@ -12,6 +12,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout')->name('logout');
 
     Route::get('/menus', \App\Livewire\Menu\Index::class)->name('menus.index');
+    Route::get('/customers', \App\Livewire\Customer\Index::class)->name('customers.index');
 });
 
 Route::middleware('guest')->group(function () {

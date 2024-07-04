@@ -20,7 +20,8 @@
             </summary>
             <ul>
                 <li><a href="{{ route('menus.index') }}" wire:navigate @class(['active' => Route::is('menus.index')])>Data Menu</a></li>
-                <li><a href="" wire:navigate @class(['active' => false])>Data Pelanggan</a></li>
+                <li><a href="{{ route('customers.index') }}" wire:navigate @class(['active' => Route::is('customers.index')])>Data
+                        Pelanggan</a></li>
                 <li><a href="" wire:navigate @class(['active' => false])>Riwayat Transaksi</a></li>
             </ul>
         </details>

@@ -18,7 +18,7 @@
                 <x-textarea :label="'Keterangan'" :wire-model="'form.desc'" :placeholder="'Ketikkan keterangan menu'" :error="$errors->first('form.desc')"></x-textarea>
             </div>
             <div class="flex justify-between modal-actions">
-                <button type="button" class="btn btn-ghost btn-sm" wire:click="closeMenu">
+                <button type="button" class="btn btn-ghost btn-sm" wire:click="closeModal">
                     <x-tabler-x class="size-4" />
                     <span>Batal</span>
                 </button>

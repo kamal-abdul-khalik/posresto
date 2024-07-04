@@ -43,7 +43,7 @@ class Actions extends Component
             $this->form->store();
             $this->success('Menu saved successfully');
         }
-        $this->closeMenu();
+        $this->closeModal();
         $this->dispatch('reload');
     }
 
@@ -63,7 +63,7 @@ class Actions extends Component
         $this->success('Menu deleted successfully');
     }
 
-    public function closeMenu(): void
+    public function closeModal(): void
     {
         $this->showModalForm = false;
         $this->form->reset();

@@ -31,7 +31,7 @@
             @endforelse
         </div>
         <div class="card h-fit">
-            <form class="space-y-4 card-body" wire:submit="save">
+            <div class="card-body">
                 <h3 class="card-title">Detail Transaksi</h3>
                 <div class="table-wrapper">
                     <table class="table">
@@ -46,7 +46,7 @@
                         </thead>
                         <tbody>
                             @forelse ($items ?? [] as $key => $value)
-                                <tr class="font-semibold">
+                                <tr class="font-semibold" wire:key="{{ $key }}">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $key }}</td>
                                     <td>{{ $value['qty'] }}</td>
@@ -76,20 +76,22 @@
                         </tbody>
                     </table>
                 </div>
-                <x-select :label="'Pelanggan'" :wire-model="'form.customer_id'" :error="$errors->first('form.customer_id')" :options="$customers" />
-                <x-textarea :label="'Keterangan'" :wire-model="'form.desc'" :placeholder="'Anda dapat mengetikkan nomor meja atau keterangan lainnya'" :error="$errors->first('form.desc')"></x-textarea>
-                <div class="justify-between card-actions">
-                    <div class="flex flex-col">
-                        <div class="text-xs">Total Harga: </div>
-                        <div @class(['card-title', 'text-error' => $errors->first('items')])>Rp.
-                            {{ Number::format($this->getTotalPrice(), locale: 'id') }}</div>
+                <form class="space-y-4 " wire:submit="save">
+                    <x-select :label="'Pelanggan'" :wire-model="'form.customer_id'" :error="$errors->first('form.customer_id')" :options="$customers" />
+                    <x-textarea :label="'Keterangan'" :wire-model="'form.desc'" :placeholder="'Anda dapat mengetikkan nomor meja atau keterangan lainnya'" :error="$errors->first('form.desc')"></x-textarea>
+                    <div class="justify-between card-actions">
+                        <div class="flex flex-col">
+                            <div class="text-xs">Total Harga: </div>
+                            <div @class(['card-title', 'text-error' => $errors->first('items')])>Rp.
+                                {{ Number::format($this->getTotalPrice(), locale: 'id') }}</div>
+                        </div>
+                        <button class="btn btn-primary btn-sm">
+                            <x-tabler-check class="size-4" />
+                            <span>Simpan</span>
+                        </button>
                     </div>
-                    <button class="btn btn-primary btn-sm">
-                        <x-tabler-check class="size-4" />
-                        <span>Simpan</span>
-                    </button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>

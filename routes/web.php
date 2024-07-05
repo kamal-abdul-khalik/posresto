@@ -16,6 +16,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/transactions/create', \App\Livewire\Transaction\Actions::class)->name('transaction.create');
     Route::get('/transactions/index', \App\Livewire\Transaction\Index::class)->name('transaction.index');
+    Route::get('/transactions/export', \App\Livewire\Transaction\Export::class)->name('transaction.export');
     Route::get('/transactions/{transaction}/edit', \App\Livewire\Transaction\Actions::class)->name('transaction.edit');
     Route::get('/transactions/{transaction}/receipt', \App\Livewire\Transaction\Receipt::class)->name('transaction.receipt');
 });

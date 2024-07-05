@@ -3,9 +3,9 @@
         <label class="flex items-center gap-2 input input-bordered">
             <input type="date" class="grow" wire:model.live="date" />
         </label>
-        <a type="button" href="{{ route('transaction.create') }}" class="btn btn-primary" wire:navigate>
-            <x-tabler-plus class="size-4" />
-            <span>Transaksi</span>
+        <a type="button" href="{{ route('transaction.export') }}" class="btn btn-primary" wire:navigate>
+            <x-tabler-table-export class="size-4" />
+            <span>Export</span>
         </a>
     </div>
     <div class="table-wrapper">

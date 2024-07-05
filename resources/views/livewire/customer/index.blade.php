@@ -1,12 +1,12 @@
 <div class="page-wrapper">
-    <div class="flex justify-between">
+    <div class="flex flex-col justify-between gap-2 md:flex-row">
         <label class="flex items-center gap-2 input input-bordered">
             <input type="search" class="grow" placeholder="Search" wire:model.live.debounce.600ms="search" />
             <x-tabler-search class="size-4 text-base-300" />
         </label>
         <button for="modalAddCustomer" class="btn btn-primary" wire:click="$dispatch('createCustomer')">
             <x-tabler-plus class="size-4" />
-            <span>customer</span>
+            <span>Pelanggan</span>
         </button>
     </div>
     <div class="table-wrapper">

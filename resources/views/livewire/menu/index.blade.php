@@ -1,5 +1,5 @@
 <div class="page-wrapper">
-    <div class="flex justify-between">
+    <div class="flex flex-col justify-between gap-2 md:flex-row">
         <label class="flex items-center gap-2 input input-bordered">
             <input type="search" class="grow" placeholder="Search" wire:model.live.debounce.600ms="search" />
             <x-tabler-search class="size-4 text-base-300" />

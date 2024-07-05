@@ -70,6 +70,10 @@ class Actions extends Component
 
     public function save()
     {
+        if (empty($this->items)) {
+            $this->error('Transaksi kosong tidak dapat disimpan');
+        }
+
         $this->validate([
             'items' => 'required',
         ]);

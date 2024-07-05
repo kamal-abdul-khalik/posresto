@@ -48,5 +48,5 @@ thead{
 }
 
 .table-wrapper{
-    @apply bg-base-100 border border-base-300 overflow-y-auto rounded-md scrollbar-hide whitespace-nowrap
+    @apply bg-base-100 border border-base-300 overflow-y-auto rounded-2xl scrollbar-hide whitespace-nowrap
 }

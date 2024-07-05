@@ -26,7 +26,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $transaction->created_at->diffForHumans() }}</td>
-                        <td>{{ $transaction->desc }}</td>
+                        <td>{{ Str::limit($transaction->desc, 20) }}</td>
                         <td>{{ $transaction->customer->name ?? '-' }}</td>
                         <td>Rp. {{ Number::format($transaction->total, locale: 'id') }}</td>
                         <td>

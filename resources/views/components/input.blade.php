@@ -5,6 +5,6 @@
     <input type="{{ $type }}" wire:model="{{ $wireModel }}" placeholder="{{ $placeholder }}"
         @class(['input input-bordered', 'input-error' => $error]) />
     @if ($error)
-        <span class="text-xs text-error">{{ $error }}</span>
+        <span class="mt-2 text-xs text-error">{{ $error }}</span>
     @endif
 </label>

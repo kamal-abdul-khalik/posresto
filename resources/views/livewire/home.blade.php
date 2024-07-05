@@ -66,7 +66,7 @@
                                 <td>{{ $item->created_at->format('d M Y') }}</td>
                                 <td>{{ $item->customer?->name }}</td>
                                 <td>Rp. {{ Number::format($item->total, locale: 'id') }}</td>
-                                <td>{{ $item->desc }}</td>
+                                <td>{{ Str::limit($item->desc, 10) }}</td>
                                 <td>
                                     <input type="checkbox" class="toggle toggle-xs" @checked($item->is_done)
                                         wire:change="toogleDone({{ $item->id }})" />

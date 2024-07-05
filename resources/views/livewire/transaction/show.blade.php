@@ -13,6 +13,10 @@
                     <div class="font-semibold">{{ $transaction?->customer?->name ?? '-' }}</div>
                 </div>
                 <div class="flex flex-col">
+                    <div class="text-sm opacity-50">Keterangan</div>
+                    <div class="text-sm opacity-80">{{ $transaction?->desc }}</div>
+                </div>
+                <div class="flex flex-col">
                     <div class="text-sm opacity-50">Total Bayar</div>
                     <div class="font-bold">Rp. {{ Number::format($transaction?->total ?? 0, locale: 'id') }}</div>
                 </div>

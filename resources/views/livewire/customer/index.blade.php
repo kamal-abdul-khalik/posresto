@@ -26,7 +26,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $customer->name }}</td>
                         <td>{{ $customer->contact }}</td>
-                        <td>{{ $customer->desc }}</td>
+                        <td>{{ Str::limit($customer->desc, 50) }}</td>
                         <td>
                             <div class="flex gap-2">
                                 <button class="btn btn-xs text-info btn-square"

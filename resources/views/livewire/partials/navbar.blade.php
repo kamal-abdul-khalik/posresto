@@ -1,4 +1,4 @@
-<div class="sticky top-0 z-50 border-b navbar bg-base-100 border-base-300">
+<div class="sticky top-0 z-50 border-b navbar bg-base-100 border-base-300 print:hidden">
     <div class="navbar-start">
         <label for="sidebar-drawer" class="btn btn-ghost btn-circle lg:hidden">
             <x-tabler-menu class="size-5" />

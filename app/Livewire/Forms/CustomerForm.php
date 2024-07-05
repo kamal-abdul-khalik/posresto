@@ -20,7 +20,7 @@ class CustomerForm extends Form
         $this->desc = $customer->desc;
     }
 
-    public function store(): void
+    public function store()
     {
         $data = $this->validate([
             'name' => 'required|max:255',

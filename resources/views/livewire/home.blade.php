@@ -57,6 +57,7 @@
                             <th>Total Bayar </th>
                             <th>Keterangan</th>
                             <th>Status</th>
+                            <th>Cetak</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,6 +71,12 @@
                                 <td>
                                     <input type="checkbox" class="toggle toggle-xs" @checked($item->is_done)
                                         wire:change="toogleDone({{ $item->id }})" />
+                                </td>
+                                <td>
+                                    <button class="btn btn-xs"
+                                        onclick="return receiptPrint('{{ route('transaction.receipt', $item) }}')">
+                                        <x-tabler-printer class="size-4" />
+                                    </button>
                                 </td>
                             </tr>
                         @empty

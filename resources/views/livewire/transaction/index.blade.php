@@ -35,14 +35,14 @@
                         </td>
                         <td>
                             <div class="flex justify-center gap-1">
-                                <a href="{{ route('transaction.edit', $transaction) }}" class="btn btn-xs btn-square"
-                                    wire:navigate>
-                                    <x-tabler-edit class="size-4" />
-                                </a>
                                 <button class="btn btn-xs btn-square"
                                     wire:click="$dispatch('showTransaction',{transaction:{{ $transaction->id }}})">
                                     <x-tabler-eye class="size-4 text-info" />
                                 </button>
+                                <a href="{{ route('transaction.edit', $transaction) }}" class="btn btn-xs btn-square"
+                                    wire:navigate>
+                                    <x-tabler-edit class="size-4" />
+                                </a>
                                 <button class="btn btn-xs btn-square"
                                     wire:click="deleteTransaction({{ $transaction->id }})">
                                     <x-tabler-trash class="size-4 text-error" />

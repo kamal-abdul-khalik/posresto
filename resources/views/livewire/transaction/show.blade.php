@@ -47,6 +47,13 @@
             </div>
             <div class="modal-action">
                 <button type="button" wire:click="closeModal" class="btn btn-ghost">Close!</button>
+                @isset($transaction)
+                    <a onclick="return receiptPrint('{{ route('transaction.receipt', $transaction) }}')" type="button"
+                        class="btn btn-primary">
+                        <x-tabler-printer class="size-4" />
+                        <span>Print</span>
+                    </a>
+                @endisset
             </div>
         </div>
     </div>

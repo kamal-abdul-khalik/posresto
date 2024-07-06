@@ -47,6 +47,9 @@
     <div class="flex flex-wrap -mx-4">
         <!-- Left Content -->
         <div class="w-full px-4 mb-4 md:w-3/5">
+            <div class="m-4">
+                <h3 class="font-semibold">Transaksi belum diselesaikan</h3>
+            </div>
             <div class="table-wrapper">
                 <table class="table">
                     <thead>
@@ -81,7 +84,8 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-lg font-semibold text-center opacity-50">Belum ada
+                                <td colspan="7" class="text-lg font-semibold text-center opacity-50">Belum
+                                    ada
                                     transaksi
                                     disini
                                 </td>
@@ -89,6 +93,7 @@
                         @endforelse
                     </tbody>
                 </table>
+
             </div>
             <div>
                 {{ $transactions->links() }}
@@ -96,11 +101,34 @@
         </div>
         <!-- Right Content -->
         <div class="w-full px-4 mb-4 md:w-2/5">
-            <div class="overflow-hidden bg-white rounded-lg shadow-md">
-                {{-- <div class="p-6">
-                    <h2 class="mb-2 text-2xl font-bold">Right Content</h2>
-                    <p class="text-gray-700">This is the content on the right side, taking 40% of the width.</p>
-                </div> --}}
+            <div class="m-4">
+                <h3 class="font-semibold">Menu terlaris bulan ini</h3>
+            </div>
+            <div class="table-wrapper">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Menu</th>
+                            <th class="text-center">Total Terjual</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($totalSales as $row)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $row['name'] }}</td>
+                                <td>{{ $row['total_penjualan'] }}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="3" class="text-lg font-semibold text-center opacity-50">Belum ada
+                                    menu terbaik
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -20,11 +20,11 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->respond(function (Response $response) {
-            if ($response->getStatusCode() === 403) {
-                session()->flash('flash.banner', 'Sorry, ' . $response->exception->getMessage() . ' 🙏');
-                session()->flash('flash.bannerStyle', 'danger');
-                return redirect()->intended('/dashboard');
-            }
-        });
+        // $exceptions->respond(function (Response $response) {
+        //     if ($response->getStatusCode() === 403) {
+        //         session()->flash('flash.banner', 'Sorry, ' . $response->exception->getMessage() . ' 🙏');
+        //         session()->flash('flash.bannerStyle', 'danger');
+        //         return redirect()->intended(route('home'));
+        //     }
+        // });
     })->create();

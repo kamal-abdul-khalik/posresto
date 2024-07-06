@@ -2,7 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Models\Menu;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
@@ -32,13 +34,47 @@ class Home extends Component
             ->whereYear('created_at', $year);
 
         $transactions = Transaction::query()
-            ->where('is_done', false)
+            ->whereIsDone(false)
             ->with('customer')
+            ->latest()
             ->paginate(10);
 
+        // Mengambil semua transaksi
+        $getTransactions = Transaction::all();
+        // Variabel untuk menyimpan total penjualan
+        $totalPenjualan = [];
+        // Loop melalui setiap transaksi
+        foreach ($getTransactions as $transaction) {
+            $items = $transaction->items; // items sudah berupa array
+            foreach ($items as $name => $data) {
+                if (!isset($totalPenjualan[$name])) {
+                    $totalPenjualan[$name] = 0;
+                }
+                $totalPenjualan[$name] += $data['qty'];
+            }
+        }
+
+        // Mengkonversi hasil ke bentuk yang diinginkan
+        $result = [];
+        foreach ($totalPenjualan as $name => $qty) {
+            $result[] = [
+                'name' => $name,
+                'total_penjualan' => $qty
+            ];
+        }
+
+        // Mengurutkan hasil dari yang terbanyak ke yang terkecil
+        usort($result, function ($a, $b) {
+            return $b['total_penjualan'] - $a['total_penjualan'];
+        });
+
+        // Mengambil hanya 5 data teratas
+        $result = array_slice($result, 0, 5);
+
         return view('livewire.home', [
-            'monthly' => $income->get()->sum('total'),
-            'today' => $income->whereDate('created_at', $today)->get(),
+            'monthly' => $income->done()->get()->sum('total'),
+            'today' => $income->whereDate('created_at', $today)->done()->get(),
+            'totalSales' => $result,
             'transactions' => $transactions,
         ]);
     }

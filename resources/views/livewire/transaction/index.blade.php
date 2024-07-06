@@ -30,8 +30,10 @@
                         <td>{{ $transaction->customer->name ?? '-' }}</td>
                         <td>Rp. {{ Number::format($transaction->total, locale: 'id') }}</td>
                         <td>
-                            <input type="checkbox" class="toggle toggle-xs" @checked($transaction->is_done)
-                                wire:change="toogleDone({{ $transaction->id }})" />
+                            @can('create transactions')
+                                <input type="checkbox" class="toggle toggle-xs" @checked($transaction->is_done)
+                                    wire:change="toogleDone({{ $transaction->id }})" />
+                            @endcan
                         </td>
                         <td>
                             <div class="flex justify-center gap-1">
@@ -39,14 +41,18 @@
                                     wire:click="$dispatch('showTransaction',{transaction:{{ $transaction->id }}})">
                                     <x-tabler-eye class="size-4 text-info" />
                                 </button>
-                                <a href="{{ route('transaction.edit', $transaction) }}" class="btn btn-xs btn-square"
-                                    wire:navigate>
-                                    <x-tabler-edit class="size-4" />
-                                </a>
-                                <button class="btn btn-xs btn-square"
-                                    wire:click="deleteTransaction({{ $transaction->id }})">
-                                    <x-tabler-trash class="size-4 text-error" />
-                                </button>
+                                @can('show transactions')
+                                    <a href="{{ route('transaction.edit', $transaction) }}" class="btn btn-xs btn-square"
+                                        wire:navigate>
+                                        <x-tabler-edit class="size-4" />
+                                    </a>
+                                @endcan
+                                @can('delete transactions')
+                                    <button class="btn btn-xs btn-square"
+                                        wire:click="deleteTransaction({{ $transaction->id }})">
+                                        <x-tabler-trash class="size-4 text-error" />
+                                    </button>
+                                @endcan
                             </div>
                         </td>
                     </tr>

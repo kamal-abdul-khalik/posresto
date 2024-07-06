@@ -4,10 +4,12 @@
             <input type="search" class="grow" placeholder="Search" wire:model.live.debounce.600ms="search" />
             <x-tabler-search class="size-4 text-base-300" />
         </label>
-        <button for="modalAddMenu" class="btn btn-primary" wire:click="$dispatch('createMenu')">
-            <x-tabler-plus class="size-4" />
-            <span>Menu</span>
-        </button>
+        @can('create menus')
+            <button for="modalAddMenu" class="btn btn-primary" wire:click="$dispatch('createMenu')">
+                <x-tabler-plus class="size-4" />
+                <span>Menu</span>
+            </button>
+        @endcan
     </div>
     <div class="table-wrapper">
         <table class="table">
@@ -41,14 +43,18 @@
                         <td>{{ $menu->desclimit }}</td>
                         <td>
                             <div class="flex gap-2">
-                                <button class="btn btn-xs text-info btn-square"
-                                    wire:click="$dispatch('editMenu', {menu: {{ $menu->id }}})">
-                                    <x-tabler-edit class="size-4" />
-                                </button>
-                                <button class="btn btn-xs text-error btn-square"
-                                    wire:click="$dispatch('deleteMenu', {menu: {{ $menu->id }}})">
-                                    <x-tabler-trash class="size-4" />
-                                </button>
+                                @can('edit menus')
+                                    <button class="btn btn-xs text-info btn-square"
+                                        wire:click="$dispatch('editMenu', {menu: {{ $menu->id }}})">
+                                        <x-tabler-edit class="size-4" />
+                                    </button>
+                                @endcan
+                                @can('delete menus')
+                                    <button class="btn btn-xs text-error btn-square"
+                                        wire:click="$dispatch('deleteMenu', {menu: {{ $menu->id }}})">
+                                        <x-tabler-trash class="size-4" />
+                                    </button>
+                                @endcan
                             </div>
                         </td>
                     </tr>

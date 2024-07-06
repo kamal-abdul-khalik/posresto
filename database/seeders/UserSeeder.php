@@ -39,12 +39,23 @@ class UserSeeder extends Seeder
         Permission::create(['name' => 'edit categories']);
         Permission::create(['name' => 'delete categories']);
 
+        // create permissions categories
+        Permission::create(['name' => 'index customers']);
+        Permission::create(['name' => 'create customers']);
+        Permission::create(['name' => 'edit customers']);
+        Permission::create(['name' => 'delete customers']);
+
         // create roles and assign existing permissions
         $cashier = Role::create(['name' => 'cashier']);
         $cashier->givePermissionTo('index transactions');
         $cashier->givePermissionTo('create transactions');
         $cashier->givePermissionTo('edit transactions');
         $cashier->givePermissionTo('print receipt');
+
+        $cashier->givePermissionTo('index customers');
+        $cashier->givePermissionTo('create customers');
+        $cashier->givePermissionTo('edit customers');
+        $cashier->givePermissionTo('delete customers');
 
         $admin = Role::create(['name' => 'admin']);
         $admin->givePermissionTo('index menus');
@@ -62,21 +73,21 @@ class UserSeeder extends Seeder
         // create superadmin
         $user = \App\Models\User::factory()->create([
             'name' => 'Superadmin',
-            'email' => 'elsakcf@gmail.com',
+            'email' => 'super@test.com',
         ]);
         $user->assignRole($superadmin);
 
         // create admin
         $user = \App\Models\User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
+            'name' => 'Admin',
+            'email' => 'admin@test.com',
         ]);
         $user->assignRole($admin);
 
         // create cashier
         $user = \App\Models\User::factory()->create([
-            'name' => 'Cashier',
-            'email' => 'kasir@example.com',
+            'name' => 'Kasir 1',
+            'email' => 'kasir@test.com',
         ]);
         $user->assignRole($cashier);
     }

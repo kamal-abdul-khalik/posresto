@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Middleware\EnsureUserCanVisitPage;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -20,11 +23,20 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        // $exceptions->respond(function (Response $response) {
-        //     if ($response->getStatusCode() === 403) {
-        //         session()->flash('flash.banner', 'Sorry, ' . $response->exception->getMessage() . ' 🙏');
-        //         session()->flash('flash.bannerStyle', 'danger');
-        //         return redirect()->intended(route('home'));
-        //     }
-        // });
+        $exceptions->respond(function ($response) {
+            if ($response instanceof \Illuminate\Http\RedirectResponse) {
+                // Handle the RedirectResponse case
+                if ($response->getStatusCode() === 302) {
+                    return redirect(route('login'));
+                }
+            } elseif ($response instanceof \Illuminate\Http\Response) {
+                // Handle the Response case
+                // dd($response);
+                if ($response->getStatusCode() === 403) {
+                    session()->flash('flash.banner', 'Mohon maaf 🙏, Anda tidak diizinkan mengunjungi halaman tersebut');
+                    session()->flash('flash.bannerStyle', 'danger');
+                    return redirect()->intended(route('home'));
+                }
+            }
+        });
     })->create();

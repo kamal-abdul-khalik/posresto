@@ -13,10 +13,12 @@
                     <x-tabler-x class="size-4" />
                     <span>Batal</span>
                 </button>
-                <button class="btn btn-primary btn-sm">
-                    <x-tabler-check class="size-4" />
-                    <span>Simpan</span>
-                </button>
+                @can('create customers')
+                    <button class="btn btn-primary btn-sm">
+                        <x-tabler-check class="size-4" />
+                        <span>Simpan</span>
+                    </button>
+                @endcan
             </div>
         </form>
     </div>

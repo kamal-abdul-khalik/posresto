@@ -21,20 +21,24 @@
             </thead>
             <tbody>
                 @forelse ($categories as $category)
-                    <tr wire:key="{{ $category->id }}">
+                    <tr wire:key="cat-{{ $category->id }}">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->slug }}</td>
                         <td>
                             <div class="flex gap-2">
-                                <button class="btn btn-xs text-info btn-square"
-                                    wire:click="$dispatch('editCategory', {category: {{ $category->id }}})">
-                                    <x-tabler-edit class="size-4" />
-                                </button>
-                                <button class="btn btn-xs text-error btn-square"
-                                    wire:click="$dispatch('deleteCategory', {category: {{ $category->id }}})">
-                                    <x-tabler-trash class="size-4" />
-                                </button>
+                                @can('edit categories')
+                                    <button class="btn btn-xs text-info btn-square"
+                                        wire:click="$dispatch('editCategory', {category: {{ $category->id }}})">
+                                        <x-tabler-edit class="size-4" />
+                                    </button>
+                                @endcan
+                                @can('delete categories')
+                                    <button class="btn btn-xs text-error btn-square"
+                                        wire:click="$dispatch('deleteCategory', {category: {{ $category->id }}})">
+                                        <x-tabler-trash class="size-4" />
+                                    </button>
+                                @endcan
                             </div>
                         </td>
                     </tr>

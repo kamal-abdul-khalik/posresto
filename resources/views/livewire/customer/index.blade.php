@@ -29,14 +29,18 @@
                         <td>{{ Str::limit($customer->desc, 50) }}</td>
                         <td>
                             <div class="flex gap-2">
-                                <button class="btn btn-xs text-info btn-square"
-                                    wire:click="$dispatch('editCustomer', {customer: {{ $customer->id }}})">
-                                    <x-tabler-edit class="size-4" />
-                                </button>
-                                <button class="btn btn-xs text-error btn-square"
-                                    wire:click="$dispatch('deleteCustomer', {customer: {{ $customer->id }}})">
-                                    <x-tabler-trash class="size-4" />
-                                </button>
+                                @can('edit customers')
+                                    <button class="btn btn-xs text-info btn-square"
+                                        wire:click="$dispatch('editCustomer', {customer: {{ $customer->id }}})">
+                                        <x-tabler-edit class="size-4" />
+                                    </button>
+                                @endcan
+                                @can('delete customers')
+                                    <button class="btn btn-xs text-error btn-square"
+                                        wire:click="$dispatch('deleteCustomer', {customer: {{ $customer->id }}})">
+                                        <x-tabler-trash class="size-4" />
+                                    </button>
+                                @endcan
                             </div>
                         </td>
                     </tr>

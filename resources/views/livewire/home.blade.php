@@ -65,7 +65,7 @@
                     </thead>
                     <tbody>
                         @forelse ($transactions as $item)
-                            <tr wire:key="{{ $item->id }}">
+                            <tr wire:key="transaksiItem-{{ $item->id }}">
                                 <td>{{ $loop->iteration }}</td>
                                 <td class="flex flex-col">
                                     <span class="text-xs font-medium">{{ $item->created_at->format('d M Y') }}</span>
@@ -75,14 +75,18 @@
                                 <td>Rp. {{ Number::format($item->total, locale: 'id') }}</td>
                                 <td>{{ Str::limit($item->desc, 10) }}</td>
                                 <td>
-                                    <input type="checkbox" class="toggle toggle-xs" @checked($item->is_done)
-                                        wire:change="toogleDone({{ $item->id }})" />
+                                    @can('create transactions')
+                                        <input type="checkbox" class="toggle toggle-xs" @checked($item->is_done)
+                                            wire:change="toogleDone({{ $item->id }})" />
+                                    @endcan
                                 </td>
                                 <td>
-                                    <button class="btn btn-xs"
-                                        onclick="return receiptPrint('{{ route('transaction.receipt', $item) }}')">
-                                        <x-tabler-printer class="size-4" />
-                                    </button>
+                                    @can('print receipt')
+                                        <button class="btn btn-xs"
+                                            onclick="return receiptPrint('{{ route('transaction.receipt', $item) }}')">
+                                            <x-tabler-printer class="size-4" />
+                                        </button>
+                                    @endcan
                                 </td>
                             </tr>
                         @empty

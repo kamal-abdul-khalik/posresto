@@ -6,12 +6,14 @@
             Home
         </a>
     </li>
-    <li>
-        <a href="{{ route('transaction.create') }}" wire:navigate @class(['active' => Route::is('transaction.create')])>
-            <x-tabler-cash-register class="size-5" />
-            Input Transaksi
-        </a>
-    </li>
+    @can('create transactions')
+        <li>
+            <a href="{{ route('transaction.create') }}" wire:navigate @class(['active' => Route::is('transaction.create')])>
+                <x-tabler-cash-register class="size-5" />
+                Input Transaksi
+            </a>
+        </li>
+    @endcan
     <li>
         <details open>
             <summary>
@@ -19,16 +21,30 @@
                 Data Master
             </summary>
             <ul>
-                <li><a href="{{ route('menus.index') }}" wire:navigate @class(['active' => Route::is('menus.index')])>Menu</a></li>
-                <li><a href="{{ route('categories.index') }}" wire:navigate @class(['active' => Route::is('categories.index')])>Kategori</a>
-                </li>
-                <li><a href="{{ route('customers.index') }}" wire:navigate @class(['active' => Route::is('customers.index')])>Pelanggan</a>
-                </li>
-                <li><a href="{{ route('transaction.index') }}" wire:navigate @class([
-                    'active' => Route::is(['transaction.index', 'transaction.export']),
-                ])>Riwayat
-                        Transaksi</a>
-                </li>
+                @can('index menus')
+                    <li>
+                        <a href="{{ route('menus.index') }}" wire:navigate @class(['active' => Route::is('menus.index')])>Menu</a>
+                    </li>
+                @endcan
+                @can('index categories')
+                    <li>
+                        <a href="{{ route('categories.index') }}" wire:navigate @class(['active' => Route::is('categories.index')])>Kategori</a>
+                    </li>
+                @endcan
+                @can('index customers')
+                    <li>
+                        <a href="{{ route('customers.index') }}" wire:navigate @class(['active' => Route::is('customers.index')])>Pelanggan</a>
+                    </li>
+                @endcan
+                @can('index transactions')
+                    <li>
+                        <a href="{{ route('transaction.index') }}" wire:navigate @class([
+                            'active' => Route::is(['transaction.index', 'transaction.export']),
+                        ])>
+                            Riwayat Transaksi
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </details>
     </li>

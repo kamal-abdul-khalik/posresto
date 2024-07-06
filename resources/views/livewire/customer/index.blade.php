@@ -22,7 +22,7 @@
             </thead>
             <tbody>
                 @forelse ($customers as $customer)
-                    <tr>
+                    <tr wire:key="{{ $customer->id }}">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $customer->name }}</td>
                         <td>{{ $customer->contact }}</td>

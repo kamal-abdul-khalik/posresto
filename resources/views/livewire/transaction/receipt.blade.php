@@ -31,7 +31,7 @@
             </div>
             <div class="space-y-2 text-sm">
                 @foreach ($transaction->items as $name => $item)
-                    <div class="flex flex-col">
+                    <div class="flex flex-col" wire:key="items-{{ $name }}">
                         <div>{{ $name }}</div>
                         <div class="flex justify-between">
                             <div>{{ $item['price'] / $item['qty'] }} x {{ $item['qty'] }}</div>

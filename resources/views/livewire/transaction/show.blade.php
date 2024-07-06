@@ -34,7 +34,7 @@
                         </thead>
                         <tbody>
                             @foreach ($transaction->items ?? [] as $key => $value)
-                                <tr>
+                                <tr wire:key="{{ $key }}">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $key }}</td>
                                     <td>{{ $value['qty'] }}</td>

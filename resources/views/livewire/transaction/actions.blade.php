@@ -11,13 +11,13 @@
                     </label>
                 </div>
                 @forelse ($menus as $category_menu => $menu)
-                    <div class="card-body">
+                    <div class="card-body" wire:key="menu-{{ $category_menu }}">
                         <div class="flex items-center gap-1">
                             <h3 class="capitalize card-title">{{ $category_menu }} :</h3>
                         </div>
                         <div class="flex flex-wrap w-full gap-2">
                             @foreach ($menu as $item)
-                                <div class="tooltip" data-tip="{{ $item->name }}">
+                                <div wire:key="{{ $item->id }}" class="tooltip" data-tip="{{ $item->name }}">
                                     <button class="avatar" wire:click="addItem({{ $item->id }})">
                                         <div class="w-16 rounded-lg md:w-24">
                                             <img src="{{ $item->img }}" alt="{{ $item->name }}">

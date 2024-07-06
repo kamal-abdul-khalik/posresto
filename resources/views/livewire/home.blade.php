@@ -55,7 +55,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Tanggal Order</th>
+                            <th>Waktu Order</th>
                             <th>Nama Pelanggan</th>
                             <th>Total Bayar </th>
                             <th>Keterangan</th>
@@ -67,7 +67,10 @@
                         @forelse ($transactions as $item)
                             <tr wire:key="{{ $item->id }}">
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->created_at->format('d M Y') }}</td>
+                                <td class="flex flex-col">
+                                    <span class="text-xs font-medium">{{ $item->created_at->format('d M Y') }}</span>
+                                    <span class="text-xs opacity-70">{{ $item->created_at->diffForHumans() }}</span>
+                                </td>
                                 <td>{{ $item->customer?->name }}</td>
                                 <td>Rp. {{ Number::format($item->total, locale: 'id') }}</td>
                                 <td>{{ Str::limit($item->desc, 10) }}</td>
@@ -115,7 +118,7 @@
                     </thead>
                     <tbody>
                         @forelse ($totalSales as $row)
-                            <tr>
+                            <tr wire:key="{{ $row->id }}">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $row['name'] }}</td>
                                 <td class="text-center">{{ $row['total_penjualan'] }}</td>

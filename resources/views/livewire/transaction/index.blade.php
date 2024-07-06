@@ -23,7 +23,7 @@
             </thead>
             <tbody>
                 @forelse ($transactions as $transaction)
-                    <tr>
+                    <tr wire:key="{{ $transaction->id }}">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $transaction->created_at->diffForHumans() }}</td>
                         <td>{{ Str::limit($transaction->desc, 20) }}</td>

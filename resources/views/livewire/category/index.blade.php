@@ -21,7 +21,7 @@
             </thead>
             <tbody>
                 @forelse ($categories as $category)
-                    <tr>
+                    <tr wire:key="{{ $category->id }}">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->slug }}</td>

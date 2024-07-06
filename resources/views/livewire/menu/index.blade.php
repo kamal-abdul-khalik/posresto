@@ -22,7 +22,7 @@
             </thead>
             <tbody>
                 @forelse ($menus as $menu)
-                    <tr>
+                    <tr wire:key="{{ $menu->id }}">
                         <td>{{ $loop->iteration }}</td>
                         <td>
                             <div class="flex items-center gap-3">

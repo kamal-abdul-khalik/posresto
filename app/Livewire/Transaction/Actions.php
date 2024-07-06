@@ -81,10 +81,10 @@ class Actions extends Component
         $this->form->total = $this->getTotalPrice();
         if (isset($this->form->transaction)) {
             $this->form->update();
-            $this->success('Transaksi berhasil di edit');
+            $this->success('Transaksi berhasil diedit');
         } else {
             $this->form->store();
-            $this->success('Transaksi berhasil di simpan');
+            $this->success('Transaksi berhasil disimpan');
         }
         $this->redirect(route('transaction.index'), true);
     }

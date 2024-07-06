@@ -118,7 +118,7 @@
                     </thead>
                     <tbody>
                         @forelse ($totalSales as $row)
-                            <tr wire:key="{{ $row->id }}">
+                            <tr wire:key="totalSales-{{ $row['name'] }}">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $row['name'] }}</td>
                                 <td class="text-center">{{ $row['total_penjualan'] }}</td>

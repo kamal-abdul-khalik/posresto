@@ -16,6 +16,10 @@
                 <div class="drawer-content">
                     @livewire('partials.navbar')
                     {{ $slot }}
+                    <a href="{{ route('transaction.create') }}" wire:navigate type="button"
+                        class="fixed z-50 btn lg:hidden btn-circle btn-primary bottom-16 right-10">
+                        <x-tabler-cash-register class="size-6" />
+                    </a>
                 </div>
                 <div class="drawer-side">
                     <label for="sidebar-drawer" aria-label="close sidebar" class="drawer-overlay"></label>

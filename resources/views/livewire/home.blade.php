@@ -48,7 +48,7 @@
         <!-- Left Content -->
         <div class="w-full px-4 mb-4 md:w-3/5">
             <div class="m-4">
-                <h3 class="font-semibold">Transaksi belum diselesaikan</h3>
+                <h3 class="font-semibold">Transaksi Belum Selesai</h3>
             </div>
             <div class="table-wrapper">
                 <table class="table">
@@ -102,10 +102,10 @@
         <!-- Right Content -->
         <div class="w-full px-4 mb-4 md:w-2/5">
             <div class="m-4">
-                <h3 class="font-semibold">Menu terlaris bulan ini</h3>
+                <h3 class="font-semibold">Menu Terlaris</h3>
             </div>
             <div class="table-wrapper">
-                <table class="table">
+                <table class="table font-semibold">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -118,7 +118,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $row['name'] }}</td>
-                                <td>{{ $row['total_penjualan'] }}</td>
+                                <td class="text-center">{{ $row['total_penjualan'] }}</td>
                             </tr>
                         @empty
                             <tr>

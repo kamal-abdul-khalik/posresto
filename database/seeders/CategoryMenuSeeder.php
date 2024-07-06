@@ -16,9 +16,7 @@ class CategoryMenuSeeder extends Seeder
         $categories = collect([
             'Coffee',
             'non-Coffee',
-            'Desert',
-            'EsCreams',
-            'Topping',
+            'Food',
         ]);
 
         $categories->each(function ($category) {

@@ -7,7 +7,7 @@
                     <label class="flex items-center gap-2 input input-bordered">
                         <input type="searchMenu" class="grow" placeholder="Cari menu"
                             wire:model.live.debounce.600ms="search" />
-                        <x-tabler-search class="size-4 text-base-300" />
+                        <x-tabler-search class="size-5 opacity-40" />
                     </label>
                 </div>
                 @forelse ($menus as $category_menu => $menu)
@@ -38,7 +38,7 @@
 
         <!-- Right Cards -->
         <div class="flex flex-col w-full px-4 mb-4 space-y-4 md:w-1/2">
-            <div class="sticky z-10 card top-20">
+            <div class="sticky z-10 card top-10">
                 <div class="card-body">
                     <h3 class="card-title">Detail Transaksi</h3>
                     <div class="table-wrapper">

@@ -1,4 +1,4 @@
-<div class="sticky top-0 z-50 border-b navbar bg-base-100 border-base-300 print:hidden">
+<div class="border-b navbar bg-base-100 border-base-300 print:hidden">
     <div class="navbar-start">
         <label for="sidebar-drawer" class="btn btn-ghost btn-circle lg:hidden">
             <x-tabler-menu class="size-5" />
@@ -9,7 +9,7 @@
     </div>
     <div class="navbar-end">
         <a href="{{ route('transaction.create') }}" class="btn btn-ghost btn-circle" wire:navigate>
-            <x-tabler-plus class="size-5" />
+            <x-tabler-cash-register class="size-5" />
         </a>
     </div>
 </div>

@@ -12,6 +12,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout')->name('logout');
 
     Route::get('/menus', \App\Livewire\Menu\Index::class)->name('menus.index');
+    Route::get('/categories', \App\Livewire\Category\Index::class)->name('categories.index');
     Route::get('/customers', \App\Livewire\Customer\Index::class)->name('customers.index');
 
     Route::get('/transactions/create', \App\Livewire\Transaction\Actions::class)->name('transaction.create');

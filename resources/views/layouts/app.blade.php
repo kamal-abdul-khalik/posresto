@@ -30,6 +30,7 @@
 
         @guest
             <div class="flex flex-col items-center justify-center h-screen gap-8">
+                <x-tabler-chef-hat class="size-20" />
                 <h1 class="text-4xl font-bold">{{ config('app.name') }}</h1>
                 {{ $slot }}
             </div>

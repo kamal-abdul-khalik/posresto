@@ -15,6 +15,7 @@
                 <input id="sidebar-drawer" type="checkbox" class="drawer-toggle" />
                 <div class="drawer-content">
                     @livewire('partials.navbar')
+                    <x-banner />
                     {{ $slot }}
                     <a href="{{ route('transaction.create') }}" wire:navigate type="button"
                         class="fixed z-50 btn lg:hidden btn-circle btn-primary bottom-16 right-10">

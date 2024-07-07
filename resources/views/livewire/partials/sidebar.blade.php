@@ -66,7 +66,7 @@
                         <a href="{{ route('restore-menus.index') }}" wire:navigate @class(['active' => Route::is('restore-menus.index')])>Menu</a>
                     </li>
                 @endcan
-                @can('index categories')
+                {{-- @can('index categories')
                     <li>
                         <a href="{{ route('categories.index') }}" wire:navigate @class(['active' => Route::is('categories.index')])>Kategori</a>
                     </li>
@@ -84,7 +84,7 @@
                             Transaksi
                         </a>
                     </li>
-                @endcan
+                @endcan --}}
             </ul>
         </details>
     </li>

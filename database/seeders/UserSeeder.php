@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
         Permission::create(['name' => 'create menus']);
         Permission::create(['name' => 'edit menus']);
         Permission::create(['name' => 'delete menus']);
+        Permission::create(['name' => 'enable menus']);
         Permission::create(['name' => 'restore menus']);
         Permission::create(['name' => 'force delete menus']);
 
@@ -63,6 +64,7 @@ class UserSeeder extends Seeder
         $admin->givePermissionTo('create menus');
         $admin->givePermissionTo('edit menus');
         $admin->givePermissionTo('delete menus');
+        $admin->givePermissionTo('enable menus');
         $admin->givePermissionTo('index categories');
         $admin->givePermissionTo('create categories');
         $admin->givePermissionTo('edit categories');

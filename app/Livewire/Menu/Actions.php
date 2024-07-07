@@ -57,7 +57,7 @@ class Actions extends Component
     {
         $menu->delete();
         $this->dispatch('reload');
-        $this->warning('Menu dimasukkan ke tempat samapah.');
+        $this->warning('Menu masuk ke tempat sampah.');
     }
 
     public function closeModal(): void

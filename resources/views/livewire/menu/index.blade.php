@@ -43,7 +43,7 @@
                         <td>{{ $menu->harga }}</td>
                         <td>{{ $menu->desclimit }}</td>
                         <td>
-                            @can('index transactions')
+                            @can('enable menus')
                                 <input type="checkbox" class="toggle toggle-xs" @checked($menu->enabled)
                                     wire:change="toogleDone({{ $menu->id }})" />
                             @endcan

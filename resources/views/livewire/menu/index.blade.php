@@ -18,7 +18,7 @@
                     <th>#</th>
                     <th>Gambar</th>
                     <th>Harga</th>
-                    <th>Deskripsi</th>
+                    <th class="hidden md:block">Deskripsi</th>
                     <th>Aktif?</th>
                     <th>Aksi</th>
                 </tr>
@@ -41,7 +41,7 @@
                             </div>
                         </td>
                         <td>{{ $menu->harga }}</td>
-                        <td>{{ $menu->desclimit }}</td>
+                        <td class="hidden md:block">{{ $menu->desclimit }}</td>
                         <td>
                             @can('enable menus')
                                 <input type="checkbox" class="toggle toggle-xs" @checked($menu->enabled)

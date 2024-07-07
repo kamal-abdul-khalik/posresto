@@ -19,7 +19,7 @@
                             @foreach ($menu as $item)
                                 <div wire:key="{{ $item->id }}" class="tooltip" data-tip="{{ $item->name }}">
                                     <button class="avatar" wire:click="addItem({{ $item->id }})">
-                                        <div class="w-16 rounded-lg md:w-24">
+                                        <div class="w-20 rounded-lg md:w-24">
                                             <img src="{{ $item->img }}" alt="{{ $item->name }}">
                                             <pre>{{ $item->categoryMenu->name }}</pre>
                                         </div>

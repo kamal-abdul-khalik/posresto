@@ -17,10 +17,12 @@
                     @livewire('partials.navbar')
                     <x-banner />
                     {{ $slot }}
-                    <a href="{{ route('transaction.create') }}" wire:navigate type="button"
-                        class="fixed z-50 btn lg:hidden btn-circle btn-primary bottom-16 right-10">
-                        <x-tabler-cash-register class="size-6" />
-                    </a>
+                    @if (!Route::is('transaction.create'))
+                        <a href="{{ route('transaction.create') }}" wire:navigate type="button"
+                            class="fixed z-50 btn lg:hidden btn-circle btn-primary bottom-4 right-4">
+                            <x-tabler-cash-register class="size-6" />
+                        </a>
+                    @endif
                 </div>
                 <div class="drawer-side">
                     <label for="sidebar-drawer" aria-label="close sidebar" class="drawer-overlay"></label>

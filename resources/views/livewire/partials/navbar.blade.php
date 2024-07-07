@@ -4,7 +4,7 @@
             <x-tabler-menu class="size-5" />
         </label>
 
-        <a href="{{ route('transaction.create') }}" class="btn btn-ghost btn-circle" wire:navigate>
+        <a href="{{ route('transaction.create') }}" class="hidden btn btn-ghost btn-circle lg:block" wire:navigate>
             <x-tabler-cash-register class="size-5 text-info" />
         </a>
     </div>

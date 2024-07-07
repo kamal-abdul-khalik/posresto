@@ -82,7 +82,7 @@
                                 </td>
                                 <td>
                                     @can('print receipt')
-                                        <button class="btn btn-xs"
+                                        <button class="btn btn-sm btn-circle"
                                             onclick="return receiptPrint('{{ route('transaction.receipt', $item) }}')">
                                             <x-tabler-printer class="size-4" />
                                         </button>

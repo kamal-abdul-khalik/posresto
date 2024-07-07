@@ -1,4 +1,5 @@
 <div class="page-wrapper">
+    <x-offline />
     <div class="flex flex-wrap mb-6 -mx-4">
         <div class="w-full px-4 mb-4 md:w-1/3">
             <div class="card card-compact">
@@ -76,8 +77,8 @@
                                 <td>{{ Str::limit($item->desc, 10) }}</td>
                                 <td>
                                     @can('index transactions')
-                                        <input type="checkbox" class="toggle toggle-xs" @checked($item->is_done)
-                                            wire:change="toogleDone({{ $item->id }})" />
+                                        <input type="checkbox" wire:offline.remove class="toggle toggle-xs"
+                                            @checked($item->is_done) wire:change="toogleDone({{ $item->id }})" />
                                     @endcan
                                 </td>
                                 <td>

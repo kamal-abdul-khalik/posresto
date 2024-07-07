@@ -1,4 +1,5 @@
 <div class="page-wrapper">
+    <x-offline />
     <div class="flex flex-wrap -mx-4">
         <!-- Left Card -->
         <div class="w-full px-4 mb-4 md:w-1/2">
@@ -94,7 +95,7 @@
                                 <div @class(['card-title', 'text-error' => $errors->first('items')])>Rp.
                                     {{ Number::format($this->getTotalPrice(), locale: 'id') }}</div>
                             </div>
-                            <button class="btn btn-primary btn-sm">
+                            <button class="btn btn-primary btn-sm" wire:offline.remove>
                                 <x-tabler-check class="size-4" />
                                 <span>Simpan</span>
                             </button>

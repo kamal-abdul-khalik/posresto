@@ -15,7 +15,7 @@
         </li>
     @endcan
     <li>
-        <details open>
+        <details @if (Route::is(['menus.*', 'categories.*', 'customers.*', 'transaction.index'])) open @endif>
             <summary>
                 <x-tabler-category class="size-5" />
                 Data Master
@@ -48,14 +48,9 @@
             </ul>
         </details>
     </li>
+
     <li>
-        <a href="{{ route('profile') }}" wire:navigate @class(['active' => Route::is('profile')])>
-            <x-tabler-user-edit class="size-5" />
-            Edit Profil
-        </a>
-    </li>
-    <li>
-        <details open>
+        <details @if (Route::is(['restore-menus.index'])) open @endif>
             <summary class="text-error">
                 <x-tabler-recycle class="size-5" />
                 Restore
@@ -87,5 +82,12 @@
                 @endcan --}}
             </ul>
         </details>
+    </li>
+
+    <li>
+        <a href="{{ route('profile') }}" wire:navigate @class(['active' => Route::is('profile')])>
+            <x-tabler-user-edit class="size-5" />
+            Edit Profil
+        </a>
     </li>
 </ul>

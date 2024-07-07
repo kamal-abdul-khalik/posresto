@@ -1,4 +1,5 @@
 <div class="page-wrapper">
+    <x-offline />
     <div class="flex justify-between">
         <label class="flex items-center gap-2 input input-bordered">
             <input type="date" class="grow" wire:model.live="date" />
@@ -31,8 +32,8 @@
                         <td>Rp. {{ Number::format($transaction->total, locale: 'id') }}</td>
                         <td>
                             @can('index transactions')
-                                <input type="checkbox" class="toggle toggle-xs" @checked($transaction->is_done)
-                                    wire:change="toogleDone({{ $transaction->id }})" />
+                                <input type="checkbox" wire:offline.attr="disabled" class="toggle toggle-xs"
+                                    @checked($transaction->is_done) wire:change="toogleDone({{ $transaction->id }})" />
                             @endcan
                         </td>
                         <td>
@@ -48,7 +49,7 @@
                                     </a>
                                 @endcan
                                 @can('delete transactions')
-                                    <button class="btn btn-xs btn-square"
+                                    <button wire:offline.attr="disabled" class="btn btn-xs btn-square"
                                         wire:click="deleteTransaction({{ $transaction->id }})">
                                         <x-tabler-trash class="size-4 text-error" />
                                     </button>

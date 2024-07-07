@@ -6,7 +6,7 @@
             <div class="card card-divider">
                 <div class="card-body">
                     <label class="flex items-center gap-2 input input-bordered">
-                        <input type="searchMenu" class="grow" placeholder="Cari menu"
+                        <input type="searchMenu" wire:offline.attr="disabled" class="grow" placeholder="Cari menu"
                             wire:model.live.debounce.600ms="search" />
                         <x-tabler-search class="size-5 opacity-40" />
                     </label>
@@ -95,7 +95,7 @@
                                 <div @class(['card-title', 'text-error' => $errors->first('items')])>Rp.
                                     {{ Number::format($this->getTotalPrice(), locale: 'id') }}</div>
                             </div>
-                            <button class="btn btn-primary btn-sm" wire:offline.remove>
+                            <button class="btn btn-primary btn-sm" wire:offline.attr="disabled">
                                 <x-tabler-check class="size-4" />
                                 <span>Simpan</span>
                             </button>

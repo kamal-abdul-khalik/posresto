@@ -1,7 +1,9 @@
 <div class="page-wrapper">
+    <x-offline />
     <div class="flex flex-col justify-between gap-2 md:flex-row">
         <label class="flex items-center gap-2 input input-bordered">
-            <input type="search" class="grow" placeholder="Search" wire:model.live.debounce.600ms="search" />
+            <input type="search" wire:offline.attr="disabled" class="grow" placeholder="Search"
+                wire:model.live.debounce.600ms="search" />
             <x-tabler-search class="size-4 text-base-300" />
         </label>
         @can('create menus')

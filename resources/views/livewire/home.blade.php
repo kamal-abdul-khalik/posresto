@@ -77,7 +77,7 @@
                                 <td>{{ Str::limit($item->desc, 10) }}</td>
                                 <td>
                                     @can('index transactions')
-                                        <input type="checkbox" wire:offline.remove class="toggle toggle-xs"
+                                        <input type="checkbox" wire:offline.attr="disabled" class="toggle toggle-xs"
                                             @checked($item->is_done) wire:change="toogleDone({{ $item->id }})" />
                                     @endcan
                                 </td>

@@ -39,6 +39,11 @@ class Menu extends Model
         });
     }
 
+    public function scopeEnable($query)
+    {
+        return $query->where('enabled', true);
+    }
+
     public function categoryMenu(): BelongsTo
     {
         return $this->belongsTo(CategoryMenu::class);

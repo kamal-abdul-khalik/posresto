@@ -30,7 +30,7 @@
                         <td>{{ $transaction->customer->name ?? '-' }}</td>
                         <td>Rp. {{ Number::format($transaction->total, locale: 'id') }}</td>
                         <td>
-                            @can('create transactions')
+                            @can('index transactions')
                                 <input type="checkbox" class="toggle toggle-xs" @checked($transaction->is_done)
                                     wire:change="toogleDone({{ $transaction->id }})" />
                             @endcan

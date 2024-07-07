@@ -57,7 +57,6 @@ class UserSeeder extends Seeder
         $cashier->givePermissionTo('index customers');
         $cashier->givePermissionTo('create customers');
         $cashier->givePermissionTo('edit customers');
-        $cashier->givePermissionTo('delete customers');
 
         $admin = Role::create(['name' => 'admin']);
         $admin->givePermissionTo('index menus');

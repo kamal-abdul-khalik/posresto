@@ -19,6 +19,7 @@
                     <th>Gambar</th>
                     <th>Harga</th>
                     <th>Deskripsi</th>
+                    <th>Aktif?</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -41,6 +42,12 @@
                         </td>
                         <td>{{ $menu->harga }}</td>
                         <td>{{ $menu->desclimit }}</td>
+                        <td>
+                            @can('index transactions')
+                                <input type="checkbox" class="toggle toggle-xs" @checked($menu->enabled)
+                                    wire:change="toogleDone({{ $menu->id }})" />
+                            @endcan
+                        </td>
                         <td>
                             <div class="flex gap-2">
                                 @can('edit menus')

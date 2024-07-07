@@ -94,6 +94,7 @@ class Actions extends Component
         $menus = Menu::query()
             ->search($this->search)
             ->with('categoryMenu')
+            ->enable()
             ->latest()
             ->get()
             ->groupBy('categoryMenu.name');

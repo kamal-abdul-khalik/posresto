@@ -75,7 +75,7 @@
                                 <td>Rp. {{ Number::format($item->total, locale: 'id') }}</td>
                                 <td>{{ Str::limit($item->desc, 10) }}</td>
                                 <td>
-                                    @can('create transactions')
+                                    @can('index transactions')
                                         <input type="checkbox" class="toggle toggle-xs" @checked($item->is_done)
                                             wire:change="toogleDone({{ $item->id }})" />
                                     @endcan

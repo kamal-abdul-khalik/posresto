@@ -50,15 +50,42 @@
     </li>
     <li>
         <a href="{{ route('profile') }}" wire:navigate @class(['active' => Route::is('profile')])>
-            <x-tabler-settings class="size-5" />
+            <x-tabler-user-edit class="size-5" />
             Edit Profil
         </a>
     </li>
     <li>
-        <button wire:click="logout" class="font-semibold text-error" href="" wire:navigate
-            @class(['active' => false])>
-            <x-tabler-logout class="size-5" />
-            Keluar
-        </button>
+        <details open>
+            <summary class="text-error">
+                <x-tabler-recycle class="size-5" />
+                Restore
+            </summary>
+            <ul>
+                @can('restore menus')
+                    <li>
+                        <a href="{{ route('restore-menus.index') }}" wire:navigate @class(['active' => Route::is('restore-menus.index')])>Menu</a>
+                    </li>
+                @endcan
+                @can('index categories')
+                    <li>
+                        <a href="{{ route('categories.index') }}" wire:navigate @class(['active' => Route::is('categories.index')])>Kategori</a>
+                    </li>
+                @endcan
+                @can('index customers')
+                    <li>
+                        <a href="{{ route('customers.index') }}" wire:navigate @class(['active' => Route::is('customers.index')])>Pelanggan</a>
+                    </li>
+                @endcan
+                @can('index transactions')
+                    <li>
+                        <a href="{{ route('transaction.index') }}" wire:navigate @class([
+                            'active' => Route::is(['transaction.index', 'transaction.export']),
+                        ])>
+                            Transaksi
+                        </a>
+                    </li>
+                @endcan
+            </ul>
+        </details>
     </li>
 </ul>

@@ -5,12 +5,10 @@ namespace App\Livewire\Menu;
 use App\Livewire\Forms\MenuForm;
 use App\Models\CategoryMenu;
 use App\Models\Menu;
-use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Masmerise\Toaster\Toastable;
-use Masmerise\Toaster\Toaster;
 
 class Actions extends Component
 {
@@ -38,10 +36,10 @@ class Actions extends Component
 
         if (isset($this->form->menu)) {
             $this->form->update();
-            $this->success('Menu update successfully');
+            $this->success('Menu berhasil diupdate.');
         } else {
             $this->form->store();
-            $this->success('Menu saved successfully');
+            $this->success('Menu berhasil disimpan.');
         }
         $this->closeModal();
         $this->dispatch('reload');
@@ -58,9 +56,8 @@ class Actions extends Component
     public function deleteMenu(Menu $menu): void
     {
         $menu->delete();
-        $menu->image ? Storage::disk('public')->delete($menu->image) : false;
         $this->dispatch('reload');
-        $this->success('Menu deleted successfully');
+        $this->warning('Menu dimasukkan ke tempat samapah.');
     }
 
     public function closeModal(): void

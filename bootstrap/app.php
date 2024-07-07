@@ -31,12 +31,12 @@ return Application::configure(basePath: dirname(__DIR__))
                 }
             } elseif ($response instanceof \Illuminate\Http\Response) {
                 // Handle the Response case
-                // dd($response);
                 if ($response->getStatusCode() === 403) {
                     session()->flash('flash.banner', 'Mohon maaf 🙏, Anda tidak diizinkan mengunjungi halaman tersebut');
                     session()->flash('flash.bannerStyle', 'danger');
                     return redirect()->intended(route('home'));
                 }
             }
+            return $response;
         });
     })->create();

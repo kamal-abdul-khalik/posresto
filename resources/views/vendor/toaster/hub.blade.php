@@ -29,7 +29,7 @@
                 class="inline-block select-none not-italic px-6 py-3 rounded shadow-lg text-sm w-full {{ $alignment->is('bottom') ? 'mt-3' : 'mb-3' }}"
                 :class="toast.select({
                     error: 'bg-red-500',
-                    info: 'bg-gray-200',
+                    info: 'bg-sky-400 text-white',
                     success: 'bg-green-600',
                     warning: 'bg-orange-500'
                 })"></i>

@@ -23,6 +23,8 @@ class UserSeeder extends Seeder
         Permission::create(['name' => 'create menus']);
         Permission::create(['name' => 'edit menus']);
         Permission::create(['name' => 'delete menus']);
+        Permission::create(['name' => 'restore menus']);
+        Permission::create(['name' => 'force delete menus']);
 
         // create permissions transactions
         Permission::create(['name' => 'index transactions']);

@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 Route::middleware('guest')->group(function () {
-    Route::get('/', fn () => redirect()->to('/login'));
+    Route::get('/', fn () => redirect(route('login')));
     Route::get('/login', \App\Livewire\Auth\Login::class)->name('login');
 });
 
@@ -25,4 +26,8 @@ Route::group(['middleware' => ['role:admin|superadmin']], function () {
     Route::get('/categories', \App\Livewire\Category\Index::class)->name('categories.index');
     Route::get('/transactions/export', \App\Livewire\Transaction\Export::class)->name('transaction.export');
     Route::get('/transactions/{transaction}/edit', \App\Livewire\Transaction\Actions::class)->name('transaction.edit');
+});
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/restore/menus', \App\Livewire\Restore\Menu\Index::class)->name('restore-menus.index');
 });

@@ -57,6 +57,7 @@ class Actions extends Component
     {
         $this->showModalForm = false;
         $this->form->reset();
+        $this->form->resetValidation();
         $this->image = null;
     }
     public function render()

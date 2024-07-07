@@ -53,6 +53,7 @@ class Actions extends Component
     public function closeModal(): void
     {
         $this->showModalCategory = false;
+        $this->form->resetValidation();
         $this->form->reset();
     }
     public function render()

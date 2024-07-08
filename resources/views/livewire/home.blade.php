@@ -49,7 +49,16 @@
         <!-- Left Content -->
         <div class="w-full px-4 mb-4 md:w-3/5">
             <div class="m-4">
-                <h3 class="font-semibold">Transaksi Belum Selesai</h3>
+                <div class="flex items-center justify-between">
+                    <h3 class="font-semibold">Transaksi Belum Selesai</h3>
+                    @can('export transactions')
+                        <a type="button" href="{{ route('transaction.export') }}" class="btn btn-primary btn-sm"
+                            wire:navigate>
+                            <x-tabler-table-export class="size-4" />
+                            <span>Export Transaksi</span>
+                        </a>
+                    @endcan
+                </div>
             </div>
             <div class="table-wrapper">
                 <table class="table">

@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
         Permission::create(['name' => 'edit categories']);
         Permission::create(['name' => 'delete categories']);
 
-        // create permissions categories
+        // create permissions customers
         Permission::create(['name' => 'index customers']);
         Permission::create(['name' => 'create customers']);
         Permission::create(['name' => 'edit customers']);
@@ -53,6 +53,7 @@ class UserSeeder extends Seeder
         $cashier->givePermissionTo('index transactions');
         $cashier->givePermissionTo('create transactions');
         $cashier->givePermissionTo('edit transactions');
+        $cashier->givePermissionTo('show transactions');
         $cashier->givePermissionTo('print receipt');
 
         $cashier->givePermissionTo('index customers');
@@ -65,6 +66,7 @@ class UserSeeder extends Seeder
         $admin->givePermissionTo('edit menus');
         $admin->givePermissionTo('delete menus');
         $admin->givePermissionTo('enable menus');
+        $admin->givePermissionTo('restore menus');
         $admin->givePermissionTo('index categories');
         $admin->givePermissionTo('create categories');
         $admin->givePermissionTo('edit categories');

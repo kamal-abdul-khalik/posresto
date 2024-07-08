@@ -4,6 +4,7 @@
         <label class="flex items-center gap-2 input input-bordered">
             <input type="date" class="grow" wire:model.live="date" />
         </label>
+
         <a type="button" href="{{ route('transaction.export') }}" class="btn btn-primary" wire:navigate>
             <x-tabler-table-export class="size-4" />
             <span>Export</span>
@@ -38,11 +39,13 @@
                         </td>
                         <td>
                             <div class="flex justify-center gap-1">
-                                <button class="btn btn-xs btn-square"
-                                    wire:click="$dispatch('showTransaction',{transaction:{{ $transaction->id }}})">
-                                    <x-tabler-eye class="size-4 text-info" />
-                                </button>
                                 @can('show transactions')
+                                    <button class="btn btn-xs btn-square"
+                                        wire:click="$dispatch('showTransaction',{transaction:{{ $transaction->id }}})">
+                                        <x-tabler-eye class="size-4 text-info" />
+                                    </button>
+                                @endcan
+                                @can('edit transactions')
                                     <a href="{{ route('transaction.edit', $transaction) }}" class="btn btn-xs btn-square"
                                         wire:navigate>
                                         <x-tabler-edit class="size-4" />

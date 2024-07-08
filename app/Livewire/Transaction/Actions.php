@@ -43,6 +43,7 @@ class Actions extends Component
                 'price' => $menu->price
             ];
         }
+        $this->success('Item ditambahkan');
     }
 
     public function removeItem($key): void
@@ -56,6 +57,7 @@ class Actions extends Component
         } else {
             unset($this->items[$key]);
         }
+        $this->warning('Item dihapus');
     }
 
     public function getTotalPrice()

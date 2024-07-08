@@ -16,11 +16,11 @@
                         <div class="flex items-center gap-1">
                             <h3 class="capitalize card-title">{{ $category_menu }} :</h3>
                         </div>
-                        <div class="flex flex-wrap w-full gap-2">
+                        <div class="flex flex-wrap w-full gap-4 lg:gap-2">
                             @foreach ($menu as $item)
                                 <div wire:key="{{ $item->id }}" class="tooltip" data-tip="{{ $item->name }}">
                                     <button class="avatar" wire:click="addItem({{ $item->id }})">
-                                        <div class="w-20 rounded-lg md:w-24">
+                                        <div class="rounded-lg w-[65px] md:w-[125px] lg:w-[120px]">
                                             <img src="{{ $item->img }}" alt="{{ $item->name }}">
                                             <pre>{{ $item->categoryMenu->name }}</pre>
                                         </div>
@@ -31,7 +31,9 @@
                     </div>
                 @empty
                     <div class="card-body">
-                        <pre>Menu tidak ditemukan</pre>
+                        <span class="font-medium text-center opacity-60">
+                            Menu tidak ditemukan
+                        </span>
                     </div>
                 @endforelse
             </div>
@@ -75,8 +77,8 @@
                                                     Transaksi kosong tidak dapat disimpan
                                                 </span>
                                             @else
-                                                <span class="font-medium text-gray-400">
-                                                    Belum ada transaksi
+                                                <span class="font-medium opacity-60">
+                                                    Belum ada transaksi disini
                                                 </span>
                                             @endif
                                         </td>

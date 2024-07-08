@@ -15,7 +15,7 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Waktu</th>
+                    <th>Waktu-Inv</th>
                     <th>Keterangan</th>
                     <th>Pelanggan</th>
                     <th>Total</th>
@@ -27,7 +27,11 @@
                 @forelse ($transactions as $transaction)
                     <tr wire:key="{{ $transaction->id }}">
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $transaction->created_at->diffForHumans() }}</td>
+                        <td class="flex flex-col space-y-1">
+                            <span class="text-xs font-medium">{{ $transaction->created_at->format('d M Y') }}</span>
+                            <span class="text-xs opacity-70">{{ $transaction->created_at->diffForHumans() }}</span>
+                            <span class="text-xs font-semibold opacity-70">{{ $transaction->invoice }}</span>
+                        </td>
                         <td>{{ Str::limit($transaction->desc, 20) }}</td>
                         <td>{{ $transaction->customer->name ?? '-' }}</td>
                         <td>Rp. {{ Number::format($transaction->total, locale: 'id') }}</td>
@@ -39,10 +43,16 @@
                         </td>
                         <td>
                             <div class="flex justify-center gap-1">
+                                @can('print receipt')
+                                    <button class="btn btn-xs btn-square btn-warning" @disabled(!$transaction->is_done)
+                                        onclick="return receiptPrint('{{ route('transaction.receipt', $transaction) }}')">
+                                        <x-tabler-printer class="size-4" />
+                                    </button>
+                                @endcan
                                 @can('show transactions')
-                                    <button class="btn btn-xs btn-square"
+                                    <button class="btn btn-xs btn-square btn-info"
                                         wire:click="$dispatch('showTransaction',{transaction:{{ $transaction->id }}})">
-                                        <x-tabler-eye class="size-4 text-info" />
+                                        <x-tabler-eye class="size-4" />
                                     </button>
                                 @endcan
                                 @can('edit transactions')

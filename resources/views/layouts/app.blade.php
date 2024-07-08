@@ -19,7 +19,7 @@
                     {{ $slot }}
                     @if (!Route::is('transaction.create'))
                         <a href="{{ route('transaction.create') }}" wire:navigate type="button"
-                            class="fixed z-50 btn btn-circle btn-primary bottom-4 right-4">
+                            class="fixed z-50 btn btn-circle print:hidden btn-primary bottom-4 right-4">
                             <x-tabler-cash-register class="size-6" />
                         </a>
                     @endif

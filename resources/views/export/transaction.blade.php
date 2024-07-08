@@ -11,7 +11,7 @@
     <tbody>
         @foreach ($transactions as $transaction)
             <tr>
-                <td>{{ $transaction->id }}</td>
+                <td>{{ $transaction->invoice }}</td>
                 <td>{{ $transaction->created_at->format('d F Y') }}</td>
                 <td>{{ $transaction->desc }}</td>
                 <td>{{ $transaction->customer->name ?? '-' }}</td>

@@ -13,7 +13,7 @@ class Transaction extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['customer_id', 'items', 'total', 'desc', 'is_done'];
+    protected $fillable = ['invoice', 'customer_id', 'items', 'total', 'desc', 'is_done'];
 
     public function customer(): BelongsTo
     {

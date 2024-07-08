@@ -18,6 +18,7 @@ class TransactionExport implements FromView
     {
         $transactions = Transaction::query()
             ->with('customer')
+            ->done()
             ->whereMonth('created_at', $this->month)
             ->whereYear('created_at', $this->year)
             ->get();

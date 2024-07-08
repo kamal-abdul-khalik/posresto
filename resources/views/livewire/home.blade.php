@@ -77,9 +77,10 @@
                         @forelse ($transactions as $item)
                             <tr wire:key="transaksiItem-{{ $item->id }}">
                                 <td>{{ $loop->iteration }}</td>
-                                <td class="flex flex-col">
+                                <td class="flex flex-col space-y-1">
                                     <span class="text-xs font-medium">{{ $item->created_at->format('d M Y') }}</span>
                                     <span class="text-xs opacity-70">{{ $item->created_at->diffForHumans() }}</span>
+                                    <span class="text-xs font-semibold opacity-70">{{ $item->invoice }}</span>
                                 </td>
                                 <td>{{ $item->customer?->name }}</td>
                                 <td>Rp. {{ Number::format($item->total, locale: 'id') }}</td>

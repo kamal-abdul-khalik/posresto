@@ -4,21 +4,24 @@
         <div class="modal-box">
             <h3 class="text-lg font-bold">Detail Transaksi</h3>
             <div class="py-4 space-y-4">
-                <div class="flex flex-col">
-                    <div class="text-sm opacity-50">Tanggal Transaksi</div>
-                    <div>{{ $transaction?->created_at->format('d M Y H:i:s') }}</div>
+                <div class="flex justify-between">
+                    <div class="flex flex-col">
+                        <div class="text-sm opacity-70">Tanggal Transaksi</div>
+                        <div class="text-sm font-semibold opacity-70">
+                            {{ $transaction?->created_at->format('d M Y H:i:s') }}</div>
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="text-sm opacity-70">Invoice</div>
+                        <div class="text-sm font-semibold opacity-70">{{ $transaction?->invoice }}</div>
+                    </div>
                 </div>
                 <div class="flex flex-col">
-                    <div class="text-sm opacity-50">Nama Pelanggan</div>
+                    <div class="text-sm opacity-70">Nama Pelanggan</div>
                     <div class="font-semibold">{{ $transaction?->customer?->name ?? '-' }}</div>
                 </div>
                 <div class="flex flex-col">
-                    <div class="text-sm opacity-50">Keterangan</div>
+                    <div class="text-sm opacity-70">Keterangan</div>
                     <div class="text-sm opacity-80">{{ $transaction?->desc }}</div>
-                </div>
-                <div class="flex flex-col">
-                    <div class="text-sm opacity-50">Total Bayar</div>
-                    <div class="font-bold">Rp. {{ Number::format($transaction?->total ?? 0, locale: 'id') }}</div>
                 </div>
 
                 <div class="table-wrapper">
@@ -43,6 +46,11 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+
+                <div class="flex flex-col items-end mr-6">
+                    <div class="text-sm opacity-70">Total Bayar</div>
+                    <div class="font-bold">Rp. {{ Number::format($transaction?->total ?? 0, locale: 'id') }}</div>
                 </div>
             </div>
             <div class="modal-action">

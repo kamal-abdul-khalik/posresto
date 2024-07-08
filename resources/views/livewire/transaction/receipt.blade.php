@@ -8,9 +8,9 @@
             <div class="text-sm">
                 <table class="w-full">
                     <tr>
-                        <td>Kode Transaksi</td>
+                        <td>Invoice</td>
                         <td>:</td>
-                        <td>{{ $transaction->id }}</td>
+                        <td>{{ $transaction->invoice }}</td>
                     </tr>
                     <tr>
                         <td>Tanggal</td>

@@ -8,6 +8,7 @@ use Livewire\Form;
 
 class TransactionForm extends Form
 {
+    public $invoice;
     public $customer_id;
     public $items;
     public $total;
@@ -18,6 +19,7 @@ class TransactionForm extends Form
     public function setTransaction(Transaction $transaction)
     {
         $this->transaction = $transaction;
+        $this->invoice = $transaction->invoice;
         $this->customer_id = $transaction->customer_id;
         $this->items = $transaction->items;
         $this->total = $transaction->total;
@@ -32,6 +34,8 @@ class TransactionForm extends Form
             'total' => 'required',
             'desc' => 'required',
         ]);
+
+        $data['invoice'] = 'INV-' . now()->format('ymdHis');
         Transaction::create($data);
         $this->reset();
     }

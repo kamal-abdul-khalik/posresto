@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-auth()->loginUsingId(1);
+
 Route::middleware('guest')->group(function () {
     Route::get('/', fn () => redirect(route('login')));
     Route::get('/login', \App\Livewire\Auth\Login::class)->name('login');

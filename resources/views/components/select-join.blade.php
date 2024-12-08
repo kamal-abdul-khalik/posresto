@@ -4,25 +4,29 @@
     'error' => '',
     'options' => [],
     'placeholder' => 'Pilih!',
-    'buttonLabel' => 'Search'
+    'buttonLabel' => 'Search',
 ])
 
 <div class="form-control">
-    @if($label)
+    @if ($label)
         <div class="label">
             <span class="label-text">{{ $label }}</span>
         </div>
     @endif
     <div class="join">
-        <select wire:model="{{ $wireModel }}" @class(['select select-bordered join-item', 'input-error' => $error])>
+        <select wire:model="{{ $wireModel }}" @class([
+            'select select-bordered join-item w-full',
+            'input-error' => $error,
+        ])>
             <option selected value="">{{ $placeholder }}</option>
             @foreach ($options as $option)
                 <option value="{{ $option->id }}">{{ $option->name }}</option>
             @endforeach
         </select>
         <div class="indicator">
-            @if($buttonLabel === '+')
-                <button type="button" class="btn join-item" wire:click="$dispatch('show-customer-form')">{{ $buttonLabel }}</button>
+            @if ($buttonLabel === '+')
+                <button type="button" class="btn join-item"
+                    wire:click="$dispatch('show-customer-form')">{{ $buttonLabel }}</button>
             @else
                 <button class="btn join-item">{{ $buttonLabel }}</button>
             @endif

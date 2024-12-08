@@ -26,6 +26,20 @@ class Index extends Component
         $this->dispatch('play-announcement', customerName: $customerName);
     }
 
+    public function showModal(Transaction $transaction)
+    {
+        $this->dispatch('showTransaction', transaction: $transaction->id);
+    }
+
+    #[On('payment-saved')]
+    public function handlePaymentSaved($transactionId)
+    {
+        $transaction = Transaction::find($transactionId);
+        if ($transaction) {
+            $this->setReady($transaction);
+        }
+    }
+
     public function render()
     {
         $transactions = Transaction::with('customer')

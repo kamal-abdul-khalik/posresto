@@ -51,10 +51,18 @@
                                     {{ $transaction->created_at->diffForHumans() }}
                                 </span>
                                 <div class="flex gap-2">
-                                    <button wire:click="setReady({{ $transaction->id }})"
-                                        class="btn btn-circle btn-sm btn-success">
-                                        <x-tabler-check class="size-4" />
-                                    </button>
+                                    @if ($transaction->is_done)
+                                        <button wire:click="setReady({{ $transaction->id }})"
+                                            class="btn btn-circle btn-sm btn-success">
+                                            <x-tabler-check class="size-4" />
+                                        </button>
+                                    @else
+                                        <button wire:click="showModal({{ $transaction->id }})"
+                                            class="btn btn-circle btn-sm btn-primary">
+                                            <x-tabler-cash class="size-4" />
+                                        </button>
+                                    @endif
+
                                     <button wire:click="playAnnouncement({{ $transaction->id }})"
                                         class="btn btn-circle btn-sm btn-error">
                                         <x-tabler-phone-spark class="size-4" />
@@ -75,6 +83,9 @@
 
         <div class="mt-6">
             {{ $transactions->links() }}
+        </div>
+        <div>
+            @livewire('transaction.show')
         </div>
     </div>
 

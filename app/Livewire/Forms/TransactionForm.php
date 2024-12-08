@@ -36,8 +36,9 @@ class TransactionForm extends Form
         ]);
 
         $data['invoice'] = 'INV-' . now()->format('ymdHis');
-        Transaction::create($data);
+        $transaction = Transaction::create($data);
         $this->reset();
+        return $transaction;
     }
     public function update()
     {

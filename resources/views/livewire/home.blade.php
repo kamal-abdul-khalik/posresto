@@ -1,10 +1,10 @@
 <div class="page-wrapper">
     <x-offline />
-    <div class="flex flex-wrap mb-6 -mx-4">
-        <div class="w-full px-4 mb-4 md:w-1/3">
+    <div class="flex flex-wrap -mx-4 mb-6">
+        <div class="px-4 mb-4 w-full md:w-1/3">
             <div class="card card-compact">
                 <div class="card-body">
-                    <div class="flex items-center gap-x-3">
+                    <div class="flex gap-x-3 items-center">
                         <div class="p-3 rounded-full bg-primary"><x-tabler-calendar-month /></div>
                         <div class="flex flex-col">
                             <div class="font-semibold opacity-50">Pendapatan Bulan Ini</div>
@@ -14,10 +14,10 @@
                 </div>
             </div>
         </div>
-        <div class="w-full px-4 mb-4 md:w-1/3">
+        <div class="px-4 mb-4 w-full md:w-1/3">
             <div class="card card-compact">
                 <div class="card-body">
-                    <div class="flex items-center gap-x-3">
+                    <div class="flex gap-x-3 items-center">
                         <div class="p-3 rounded-full bg-primary"><x-tabler-hours-24 /></div>
                         <div class="flex flex-col">
                             <div class="font-semibold opacity-50">Pendapatan Hari Ini</div>
@@ -29,10 +29,10 @@
                 </div>
             </div>
         </div>
-        <div class="w-full px-4 mb-4 md:w-1/3">
+        <div class="px-4 mb-4 w-full md:w-1/3">
             <div class="card card-compact">
                 <div class="card-body">
-                    <div class="flex items-center gap-x-3">
+                    <div class="flex gap-x-3 items-center">
                         <div class="p-3 rounded-full bg-primary"><x-tabler-shopping-cart-copy /></div>
                         <div class="flex flex-col">
                             <div class="font-semibold opacity-50">Transaksi Hari ini</div>
@@ -47,9 +47,9 @@
     <!-- Bottom Content -->
     <div class="flex flex-wrap -mx-4">
         <!-- Left Content -->
-        <div class="w-full px-4 mb-4 md:w-3/5">
+        <div class="px-4 mb-4 w-full md:w-3/5">
             <div class="m-4">
-                <div class="flex items-center justify-between">
+                <div class="flex justify-between items-center">
                     <h3 class="font-semibold">Transaksi Belum Selesai</h3>
                     @can('export transactions')
                         <a type="button" href="{{ route('transaction.export') }}" class="btn btn-primary btn-sm"
@@ -69,8 +69,7 @@
                             <th>Nama Pelanggan</th>
                             <th>Total Bayar </th>
                             <th>Keterangan</th>
-                            <th>Status</th>
-                            <th>Cetak</th>
+                            <th>Act</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -86,26 +85,21 @@
                                 <td>Rp. {{ Number::format($item->total, locale: 'id') }}</td>
                                 <td>{{ Str::limit($item->desc, 10) }}</td>
                                 <td>
-                                    @can('index transactions')
-                                        <input type="checkbox" wire:offline.attr="disabled" class="toggle toggle-xs"
-                                            @checked($item->is_done) wire:change="toogleDone({{ $item->id }})" />
-                                    @endcan
-                                </td>
-                                <td>
-                                    @can('print receipt')
-                                        <button class="btn btn-sm btn-circle"
-                                            onclick="return receiptPrint('{{ route('transaction.receipt', $item) }}')">
-                                            <x-tabler-printer class="size-4" />
+                                    @can('show transactions')
+                                        <button class="btn btn-xs btn-info"
+                                            wire:click="$dispatch('showTransaction',{transaction:{{ $item->id }}})">
+                                            Bayar
                                         </button>
                                     @endcan
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-lg font-semibold text-center opacity-50">Belum
-                                    ada
-                                    transaksi
-                                    disini
+                                <td colspan="7" class="text-lg font-semibold text-center">
+                                    <a href="{{ route('transaction.create') }}" wire:navigate type="button"
+                                        class="btn btn-info">
+                                        <x-tabler-cash-register class="size-6" />Tambah Transaksi
+                                    </a>
                                 </td>
                             </tr>
                         @endforelse
@@ -118,7 +112,7 @@
             </div>
         </div>
         <!-- Right Content -->
-        <div class="w-full px-4 mb-4 md:w-2/5">
+        <div class="px-4 mb-4 w-full md:w-2/5">
             <div class="m-4">
                 <h3 class="font-semibold">Menu Terlaris</h3>
             </div>
@@ -149,5 +143,8 @@
                 </table>
             </div>
         </div>
+    </div>
+    <div>
+        @livewire('transaction.show')
     </div>
 </div>

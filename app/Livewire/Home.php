@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Menu;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
@@ -17,11 +18,12 @@ class Home extends Component
     use WithPagination, WithoutUrlPagination;
     use Toastable;
 
-    public function toogleDone(Transaction $transaction)
+    #[On('payment-saved')]
+    public function handlePaymentSaved($transactionId)
     {
-        $transaction->is_done = !$transaction->is_done;
-        $transaction->save();
-        $this->success('Trasaksi Selesai');
+        // The transaction is already updated in the database
+        // We just need to refresh the component
+        $this->render();
     }
 
     public function render()

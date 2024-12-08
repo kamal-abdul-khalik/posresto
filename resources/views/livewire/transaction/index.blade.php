@@ -1,7 +1,7 @@
 <div class="page-wrapper">
     <x-offline />
     <div class="flex justify-between">
-        <label class="flex items-center gap-2 input input-bordered">
+        <label class="flex gap-2 items-center input input-bordered">
             <input type="date" class="grow" wire:model.live="date" />
         </label>
 
@@ -19,7 +19,6 @@
                     <th>Keterangan</th>
                     <th>Pelanggan</th>
                     <th>Total</th>
-                    <th>Selesai?</th>
                     <th class="text-center">Aksi</th>
                 </tr>
             </thead>
@@ -36,13 +35,7 @@
                         <td>{{ $transaction->customer->name ?? '-' }}</td>
                         <td>Rp. {{ Number::format($transaction->total, locale: 'id') }}</td>
                         <td>
-                            @can('index transactions')
-                                <input type="checkbox" wire:offline.attr="disabled" class="toggle toggle-xs"
-                                    @checked($transaction->is_done) wire:change="toogleDone({{ $transaction->id }})" />
-                            @endcan
-                        </td>
-                        <td>
-                            <div class="flex justify-center gap-1">
+                            <div class="flex gap-1 justify-center">
                                 @can('print receipt')
                                     <button class="btn btn-xs btn-square btn-warning" @disabled(!$transaction->is_done)
                                         onclick="return receiptPrint('{{ route('transaction.receipt', $transaction) }}')">
@@ -51,13 +44,14 @@
                                 @endcan
                                 @can('show transactions')
                                     <button class="btn btn-xs btn-square btn-info"
-                                        wire:click="$dispatch('showTransaction',{transaction:{{ $transaction->id }}})">
+                                        wire:click="$dispatch('showTransaction',{transaction:{{ $transaction->id }}})"
+                                        @disabled($transaction->is_done)>
                                         <x-tabler-eye class="size-4" />
                                     </button>
                                 @endcan
                                 @can('edit transactions')
                                     <a href="{{ route('transaction.edit', $transaction) }}" class="btn btn-xs btn-square"
-                                        wire:navigate>
+                                        wire:navigate @disabled($transaction->is_done)>
                                         <x-tabler-edit class="size-4" />
                                     </a>
                                 @endcan

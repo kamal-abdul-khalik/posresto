@@ -2,21 +2,21 @@
     <x-offline />
     <div class="flex flex-wrap -mx-4">
         <!-- Left Card -->
-        <div class="w-full px-4 mb-4 md:w-1/2">
+        <div class="px-4 mb-4 w-full md:w-1/2">
             <div class="card card-divider">
                 <div class="card-body">
-                    <label class="flex items-center gap-2 input input-bordered">
+                    <label class="flex gap-2 items-center input input-bordered">
                         <input type="searchMenu" wire:offline.attr="disabled" class="grow" placeholder="Cari menu"
                             wire:model.live.debounce.600ms="search" />
-                        <x-tabler-search class="size-5 opacity-40" />
+                        <x-tabler-search class="opacity-40 size-5" />
                     </label>
                 </div>
                 @forelse ($menus as $category_menu => $menu)
                     <div class="card-body" wire:key="menu-{{ $category_menu }}">
-                        <div class="flex items-center gap-1">
+                        <div class="flex gap-1 items-center">
                             <h3 class="capitalize card-title">{{ $category_menu }} :</h3>
                         </div>
-                        <div class="flex flex-wrap w-full gap-4 lg:gap-2">
+                        <div class="flex flex-wrap gap-4 w-full lg:gap-2">
                             @foreach ($menu as $item)
                                 <div wire:key="{{ $item->id }}" class="tooltip" data-tip="{{ $item->name }}">
                                     <button class="avatar" wire:click="addItem({{ $item->id }})">
@@ -40,8 +40,8 @@
         </div>
 
         <!-- Right Cards -->
-        <div class="flex flex-col w-full px-4 mb-4 space-y-4 md:w-1/2">
-            <div class="sticky z-10 card top-10">
+        <div class="flex flex-col px-4 mb-4 space-y-4 w-full md:w-1/2">
+            <div class="sticky top-10 z-10 card">
                 <div class="card-body">
                     <h3 class="card-title">Detail Transaksi</h3>
                     <div class="table-wrapper">
@@ -87,11 +87,11 @@
                             </tbody>
                         </table>
                     </div>
-                    <form class="space-y-4 " wire:submit="save">
+                    <form class="space-y-4" wire:submit="save">
                         <x-select :label="'Pelanggan'" :wire-model="'form.customer_id'" :error="$errors->first('form.customer_id')" :options="$customers" />
                         <x-textarea :label="'Keterangan'" :wire-model="'form.desc'" :placeholder="'Anda dapat mengetikkan nomor meja atau keterangan lainnya'"
                             :error="$errors->first('form.desc')"></x-textarea>
-                        <div class="items-center justify-between card-actions">
+                        <div class="justify-between items-center card-actions">
                             <div class="flex flex-col">
                                 <div class="text-xs">Total Harga: </div>
                                 <div @class(['card-title', 'text-error' => $errors->first('items')])>Rp.
@@ -99,12 +99,15 @@
                             </div>
                             <button class="btn btn-primary btn-sm" wire:offline.attr="disabled">
                                 <x-tabler-check class="size-4" />
-                                <span>Simpan</span>
+                                <span>Proses</span>
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
+    <div>
+        @livewire('transaction.show')
     </div>
 </div>

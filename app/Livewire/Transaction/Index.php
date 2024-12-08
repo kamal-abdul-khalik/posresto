@@ -3,6 +3,7 @@
 namespace App\Livewire\Transaction;
 
 use App\Models\Transaction;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -14,12 +15,22 @@ class Index extends Component
     use WithoutUrlPagination;
     use Toastable;
 
+    #[On('payment-saved')]
+    public function handlePaymentSaved($transactionId)
+    {
+        // The transaction is already updated in the database
+        // We just need to refresh the component
+        $this->render();
+    }
+
     public $search = '';
     public $startDate;
     public $endDate;
+    public $date;
 
     public function mount()
     {
+        $this->date = now()->format('Y-m-d');
         $this->startDate = now()->format('Y-m-d');
         $this->endDate = now()->format('Y-m-d');
     }
@@ -42,10 +53,10 @@ class Index extends Component
             ->when($this->search, function ($query) {
                 $query->where('invoice', 'like', "%{$this->search}%");
             })
-            ->when($this->startDate && $this->endDate, function ($query) {
-                $query->whereDate('created_at', '>=', $this->startDate)
-                    ->whereDate('created_at', '<=', $this->endDate);
+            ->when($this->date, function ($query) {
+                $query->whereDate('created_at', $this->date);
             })
+            ->with('customer')
             ->latest();
 
         return view('livewire.transaction.index', [

@@ -19,7 +19,7 @@
                     {{ $slot }}
                     @if (!Route::is('transaction.create'))
                         <a href="{{ route('transaction.create') }}" wire:navigate type="button"
-                            class="fixed z-50 btn btn-circle print:hidden btn-primary bottom-4 right-4">
+                            class="fixed right-4 bottom-4 z-50 btn btn-circle print:hidden btn-info">
                             <x-tabler-cash-register class="size-6" />
                         </a>
                     @endif
@@ -32,7 +32,7 @@
         @endauth
 
         @guest
-            <div class="flex flex-col items-center justify-center h-screen gap-8 print:hidden">
+            <div class="flex flex-col gap-8 justify-center items-center h-screen print:hidden">
                 <x-tabler-chef-hat class="size-20" />
                 <h1 class="text-4xl font-bold">{{ config('app.name') }}</h1>
                 {{ $slot }}

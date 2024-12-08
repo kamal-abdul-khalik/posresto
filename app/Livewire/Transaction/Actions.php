@@ -72,23 +72,33 @@ class Actions extends Component
 
     public function save()
     {
-        if (empty($this->items)) {
-            $this->error('Transaksi kosong tidak dapat disimpan');
-        }
-
         $this->validate([
-            'items' => 'required',
+            'items' => ['required', 'array', 'min:1'],
         ]);
         $this->form->items = $this->items;
         $this->form->total = $this->getTotalPrice();
-        if (isset($this->form->transaction)) {
-            $this->form->update();
-            $this->success('Transaksi berhasil diedit');
-        } else {
-            $this->form->store();
-            $this->success('Transaksi berhasil disimpan');
+        
+        try {
+            if (isset($this->form->transaction)) {
+                $this->form->update();
+                $transaction = $this->form->transaction;
+                $this->success('Transaksi berhasil diedit');
+            } else {
+                $transaction = $this->form->store();
+                $this->success('Transaksi berhasil disimpan');
+            }
+            
+            // Show transaction modal instead of redirecting
+            if ($transaction) {
+                $this->dispatch('showTransaction', transaction: $transaction->id);
+            }
+            
+            // Reset form
+            $this->items = [];
+            $this->form->reset();
+        } catch (\Exception $e) {
+            $this->error('Gagal menyimpan transaksi: ' . $e->getMessage());
         }
-        $this->redirect(route('transaction.index'), true);
     }
 
     public function showTransaction()

@@ -6,6 +6,7 @@ use App\Livewire\Forms\TransactionForm;
 use App\Models\Customer;
 use App\Models\Menu;
 use App\Models\Transaction;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Masmerise\Toaster\Toastable;
@@ -14,6 +15,18 @@ class Actions extends Component
 {
     use WithPagination;
     use Toastable;
+
+    public $customers = [];
+
+    #[On('customer-saved')]
+    public function handleCustomerSaved($data)
+    {
+        // Set the selected customer ID in the form
+        $this->form->customer_id = $data['customerId'];
+        
+        // Reload customers list and ensure new customer is included
+        $this->customers = Customer::all();
+    }
 
     public $items = [];
     public $search;
@@ -77,7 +90,7 @@ class Actions extends Component
         ]);
         $this->form->items = $this->items;
         $this->form->total = $this->getTotalPrice();
-        
+
         try {
             if (isset($this->form->transaction)) {
                 $this->form->update();
@@ -87,12 +100,12 @@ class Actions extends Component
                 $transaction = $this->form->store();
                 $this->success('Transaksi berhasil disimpan');
             }
-            
+
             // Show transaction modal instead of redirecting
             if ($transaction) {
                 $this->dispatch('showTransaction', transaction: $transaction->id);
             }
-            
+
             // Reset form
             $this->items = [];
             $this->form->reset();
@@ -121,9 +134,14 @@ class Actions extends Component
             ->get()
             ->groupBy('categoryMenu.name');
 
+        // Load customers if empty
+        if (empty($this->customers)) {
+            $this->customers = Customer::all();
+        }
+
         return view('livewire.transaction.actions', [
             'menus' => $menus,
-            'customers' => Customer::all(),
+            'customers' => $this->customers,
         ]);
     }
 }

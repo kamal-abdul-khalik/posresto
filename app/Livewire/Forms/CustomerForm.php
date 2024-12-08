@@ -27,8 +27,9 @@ class CustomerForm extends Form
             'contact' => 'required',
             'desc' => 'nullable|string',
         ]);
-        Customer::create($data);
+        $customer = Customer::create($data);
         $this->reset();
+        return $customer;
     }
     public function update(): void
     {

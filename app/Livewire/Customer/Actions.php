@@ -17,6 +17,11 @@ class Actions extends Component
     public $showModalForm = false;
     public CustomerForm $form;
 
+    #[On('show-customer-form')]
+    public function showCustomerForm(): void
+    {
+        $this->showModalForm = true;
+    }
 
     #[On('createCustomer')]
     public function createCustomer(): void
@@ -26,16 +31,28 @@ class Actions extends Component
 
     public function save()
     {
-
-        if (isset($this->form->customer)) {
-            $this->form->update();
-            $this->success('Customer update successfully');
-        } else {
-            $this->form->store();
-            $this->success('Customer saved successfully');
+        try {
+            if (isset($this->form->customer)) {
+                $this->form->update();
+                $customer = $this->form->customer;
+                $this->success('Customer update successfully');
+            } else {
+                $customer = $this->form->store();
+                $this->success('Customer saved successfully');
+            }
+            
+            $this->closeModal();
+            if ($customer) {
+                $this->dispatch('customer-saved', [
+                    'customerId' => $customer->id,
+                    'customerName' => $customer->name,
+                    'customerContact' => $customer->contact
+                ]);
+            }
+            $this->dispatch('reload');
+        } catch (\Exception $e) {
+            $this->error('Failed to save customer: ' . $e->getMessage());
         }
-        $this->closeModal();
-        $this->dispatch('reload');
     }
 
     #[On('editCustomer')]

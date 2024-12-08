@@ -8,20 +8,29 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class Export extends Component
 {
-    public $startDate;
-    public $endDate;
+    public $month;
 
     public function export()
     {
         $this->validate([
-            'startDate' => 'required|date|before_or_equal:endDate',
-            'endDate' => 'required|date|after_or_equal:startDate',
+            'month' => 'required|date_format:Y-m',
         ]);
 
+        // Convert month to start and end date
+        $date = \Carbon\Carbon::createFromFormat('Y-m', $this->month);
+        $startDate = $date->startOfMonth()->format('Y-m-d');
+        $endDate = $date->endOfMonth()->format('Y-m-d');
+
         return Excel::download(
-            new TransactionExport($this->startDate, $this->endDate),
-            'transactions.xlsx'
+            new TransactionExport($startDate, $endDate),
+            'transactions-' . $this->month . '.xlsx'
         );
+    }
+
+    public function mount()
+    {
+        // Set default month to current month
+        $this->month = now()->format('Y-m');
     }
 
     public function render()

@@ -88,7 +88,8 @@
                         </table>
                     </div>
                     <form class="space-y-4" wire:submit="save">
-                        <x-select :label="'Pelanggan'" :wire-model="'form.customer_id'" :error="$errors->first('form.customer_id')" :options="$customers" />
+                        <x-select-join :label="'Pelanggan'" :wire-model="'form.customer_id'" :error="$errors->first('form.customer_id')" :options="$customers"
+                            :placeholder="'Pilih Pelanggan'" :button-label="'+'" />
                         <x-textarea :label="'Keterangan'" :wire-model="'form.desc'" :placeholder="'Anda dapat mengetikkan nomor meja atau keterangan lainnya'"
                             :error="$errors->first('form.desc')"></x-textarea>
                         <div class="justify-between items-center card-actions">
@@ -109,5 +110,8 @@
     </div>
     <div>
         @livewire('transaction.show')
+    </div>
+    <div>
+        @livewire('customer.actions')
     </div>
 </div>

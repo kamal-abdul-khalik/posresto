@@ -5,7 +5,7 @@
             <h3 class="text-lg font-bold">Form Input Pelanggan</h3>
             <div class="py-4 space-y-2">
                 <x-input :label="'Nama Pelanggan'" :type="'text'" :wire-model="'form.name'" :placeholder="'Ketikkan nama pelanggan'" :error="$errors->first('form.name')" />
-                <x-input :label="'Kontak'" :type="'text'" :wire-model="'form.contact'" :placeholder="'Nomor kontak pelanggan'" :error="$errors->first('form.contact')" />
+                <x-input :label="'Kontak'" :type="'number'" :wire-model="'form.contact'" :placeholder="'Nomor kontak pelanggan'" :error="$errors->first('form.contact')" />
                 <x-textarea :label="'Keterangan'" :wire-model="'form.desc'" :placeholder="'Ketikkan keterangan'" :error="$errors->first('form.desc')"></x-textarea>
             </div>
             <div class="flex justify-between modal-actions">

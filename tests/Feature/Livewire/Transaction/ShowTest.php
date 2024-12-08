@@ -48,8 +48,47 @@ class ShowTest extends TestCase
         Livewire::test(Show::class)
             ->call('showTransaction', $transaction)
             ->set('paymentAmount', 100000)
-            ->call('closeModal');
+            ->call('savePayment');
 
         $this->assertEquals(100000, $transaction->fresh()->payment_amount);
+    }
+
+    /** @test */
+    public function can_save_payment()
+    {
+        $transaction = Transaction::factory()->create([
+            'total' => 50000,
+            'is_done' => false,
+            'payment_amount' => null
+        ]);
+
+        Livewire::test(Show::class)
+            ->call('showTransaction', $transaction)
+            ->set('paymentAmount', 100000)
+            ->call('savePayment')
+            ->assertDispatched('payment-saved', transactionId: $transaction->id);
+
+        $transaction->refresh();
+        $this->assertTrue($transaction->is_done);
+        $this->assertEquals(100000, $transaction->payment_amount);
+    }
+
+    /** @test */
+    public function cannot_save_payment_if_amount_is_zero()
+    {
+        $transaction = Transaction::factory()->create([
+            'total' => 50000,
+            'is_done' => false,
+            'payment_amount' => null
+        ]);
+
+        Livewire::test(Show::class)
+            ->call('showTransaction', $transaction)
+            ->set('paymentAmount', 0)
+            ->call('savePayment');
+
+        $transaction->refresh();
+        $this->assertFalse($transaction->is_done);
+        $this->assertNull($transaction->payment_amount);
     }
 }

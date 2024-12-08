@@ -46,6 +46,14 @@
                     <div class="text-lg font-semibold">Rp. {{ Number::format($transaction['total'], locale: 'id') }}
                     </div>
                 </div>
+                <div class="flex justify-between">
+                    <div><small>Jumlah Uang: </small></div>
+                    <div>Rp. {{ Number::format($paymentAmount ?? 0, locale: 'id') }}</div>
+                </div>
+                <div class="flex justify-between">
+                    <div><small>Kembalian: </small></div>
+                    <div>Rp. {{ Number::format(($paymentAmount ?? 0) - $transaction['total'], locale: 'id') }}</div>
+                </div>
             </div>
         </div>
     </div>

@@ -14,17 +14,20 @@ class Index extends Component
     use WithoutUrlPagination;
     use Toastable;
 
-    public $date;
+    public $search = '';
+    public $startDate;
+    public $endDate;
+
+    public function mount()
+    {
+        $this->startDate = now()->format('Y-m-d');
+        $this->endDate = now()->format('Y-m-d');
+    }
 
     public function toogleDone(Transaction $transaction)
     {
         $transaction->is_done = !$transaction->is_done;
         $transaction->save();
-    }
-
-    public function mount()
-    {
-        $this->date = now()->format('Y-m-d');
     }
 
     public function deleteTransaction(Transaction $transaction): void
@@ -35,14 +38,18 @@ class Index extends Component
 
     public function render()
     {
-        $transactions = Transaction::query()
-            ->when($this->date, function ($query) {
-                $query->whereDate('created_at', $this->date);
+        $query = Transaction::query()
+            ->when($this->search, function ($query) {
+                $query->where('invoice', 'like', "%{$this->search}%");
             })
-            ->with('customer')
-            ->latest()
-            ->paginate(10);
+            ->when($this->startDate && $this->endDate, function ($query) {
+                $query->whereDate('created_at', '>=', $this->startDate)
+                    ->whereDate('created_at', '<=', $this->endDate);
+            })
+            ->latest();
 
-        return view('livewire.transaction.index', ['transactions' => $transactions]);
+        return view('livewire.transaction.index', [
+            'transactions' => $query->paginate(10)
+        ]);
     }
 }

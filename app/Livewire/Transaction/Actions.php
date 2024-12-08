@@ -91,6 +91,16 @@ class Actions extends Component
         $this->redirect(route('transaction.index'), true);
     }
 
+    public function showTransaction()
+    {
+        $this->dispatch('showTransaction', transaction: $this->transaction);
+    }
+
+    public function printReceipt()
+    {
+        return redirect()->route('transaction.receipt', $this->transaction);
+    }
+
     public function render()
     {
         $menus = Menu::query()

@@ -68,7 +68,6 @@
                             <th>Waktu Order</th>
                             <th>Nama Pelanggan</th>
                             <th>Total Bayar </th>
-                            <th>Keterangan</th>
                             <th>Act</th>
                         </tr>
                     </thead>
@@ -83,7 +82,6 @@
                                 </td>
                                 <td>{{ $item->customer?->name }}</td>
                                 <td>Rp. {{ Number::format($item->total, locale: 'id') }}</td>
-                                <td>{{ Str::limit($item->desc, 10) }}</td>
                                 <td>
                                     @can('show transactions')
                                         <button class="btn btn-xs btn-info"

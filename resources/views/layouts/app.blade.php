@@ -39,6 +39,7 @@
             </div>
         @endguest
         <x-toaster-hub />
+        @stack('scripts')
     </body>
 
 </html>

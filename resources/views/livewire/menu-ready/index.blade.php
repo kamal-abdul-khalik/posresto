@@ -51,11 +51,13 @@
                                     {{ $transaction->created_at->diffForHumans() }}
                                 </span>
                                 <div class="flex gap-2">
-                                    <button wire:click="setReady({{ $transaction->id }})" class="btn btn-circle btn-sm btn-success">
+                                    <button wire:click="setReady({{ $transaction->id }})"
+                                        class="btn btn-circle btn-sm btn-success">
                                         <x-tabler-check class="size-4" />
                                     </button>
-                                    <button class="btn btn-circle btn-sm btn-error">
-                                        <x-tabler-player-play class="size-4" />
+                                    <button wire:click="playAnnouncement({{ $transaction->id }})"
+                                        class="btn btn-circle btn-sm btn-error">
+                                        <x-tabler-phone-spark class="size-4" />
                                     </button>
                                 </div>
                             </div>
@@ -75,4 +77,67 @@
             {{ $transactions->links() }}
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            document.addEventListener('livewire:initialized', () => {
+                Livewire.on('play-announcement', ({
+                    customerName
+                }) => {
+                    try {
+                        // Check if speech synthesis is available
+                        if (!window.speechSynthesis) {
+                            console.error('Speech synthesis not supported');
+                            return;
+                        }
+
+                        // Cancel any ongoing speech
+                        window.speechSynthesis.cancel();
+
+                        const speech = new SpeechSynthesisUtterance();
+                        speech.text =
+                            `Pesanan atas nama ${customerName}, sudah siap, silahkan menuju loket order!`;
+                        speech.lang = 'id-ID';
+                        speech.volume = 1;
+                        speech.rate = 0.8;
+                        speech.pitch = 1;
+
+                        // Add event listeners for debugging
+                        speech.onstart = () => console.log('Speech started');
+                        speech.onend = () => console.log('Speech ended');
+                        speech.onerror = (event) => console.error('Speech error:', event);
+
+                        // Get available voices
+                        let voices = window.speechSynthesis.getVoices();
+
+                        // If voices aren't loaded yet, wait for them
+                        if (voices.length === 0) {
+                            window.speechSynthesis.addEventListener('voiceschanged', () => {
+                                voices = window.speechSynthesis.getVoices();
+                                // Try to find Indonesian voice
+                                const indonesianVoice = voices.find(voice => voice.lang.includes(
+                                    'id-ID'));
+                                if (indonesianVoice) {
+                                    speech.voice = indonesianVoice;
+                                }
+                                window.speechSynthesis.speak(speech);
+                            }, {
+                                once: true
+                            });
+                        } else {
+                            // Try to find Indonesian voice
+                            const indonesianVoice = voices.find(voice => voice.lang.includes('id-ID'));
+                            if (indonesianVoice) {
+                                speech.voice = indonesianVoice;
+                            }
+                            window.speechSynthesis.speak(speech);
+                        }
+
+                    } catch (error) {
+                        console.error('Error playing announcement:', error);
+                    }
+                });
+            });
+        </script>
+    @endpush
 </div>

@@ -20,6 +20,12 @@ class Index extends Component
         $this->dispatch('$refresh');
     }
 
+    public function playAnnouncement(Transaction $transaction)
+    {
+        $customerName = $transaction->customer->name ?? 'Pelanggan';
+        $this->dispatch('play-announcement', customerName: $customerName);
+    }
+
     public function render()
     {
         $transactions = Transaction::with('customer')

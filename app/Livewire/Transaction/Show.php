@@ -9,16 +9,16 @@ use Livewire\Component;
 class Show extends Component
 {
 
-    public $modalShow = false;
     public ?Transaction $transaction = null;
-    public $paymentAmount = 0;
+    public $modalShow = false;
+    public $paymentAmount = null;
 
     #[On('showTransaction')]
     public function showTransaction(Transaction $transaction)
     {
-        $this->transaction = $transaction->load('customer');
+        $this->transaction = $transaction;
         $this->modalShow = true;
-        $this->paymentAmount = 0;
+        $this->dispatch('focus-payment');
     }
 
     public function getChangeAmountProperty()
@@ -39,7 +39,6 @@ class Show extends Component
 
     public function closeModal(): void
     {
-        $this->savePayment();
         $this->modalShow = false;
         $this->reset();
     }

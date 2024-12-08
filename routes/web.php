@@ -13,6 +13,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', \App\Livewire\Auth\Profile::class)->name('profile');
     Route::get('/logout')->name('logout');
 
+    Route::get('/ready', \App\Livewire\MenuReady\Index::class)->name('menu.ready');
+
     Route::group(['middleware' => ['role:cashier|superadmin']], function () {
         Route::get('/transactions/create', \App\Livewire\Transaction\Actions::class)->name('transaction.create');
         Route::get('/transactions/index', \App\Livewire\Transaction\Index::class)->name('transaction.index');

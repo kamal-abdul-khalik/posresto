@@ -85,6 +85,13 @@
     </li>
 
     <li>
+        <a href="{{ route('menu.ready') }}" wire:navigate @class(['active' => Route::is('menu.ready')])>
+            <x-tabler-check class="size-5" />
+            Ready Menu
+        </a>
+    </li>
+
+    <li>
         <a href="{{ route('profile') }}" wire:navigate @class(['active' => Route::is('profile')])>
             <x-tabler-user-edit class="size-5" />
             Edit Profil

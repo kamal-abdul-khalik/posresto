@@ -1,4 +1,4 @@
-<ul class="z-50 w-64 min-h-full p-4 space-y-1 border-r menu bg-base-100 text-base-content border-base-300">
+<ul class="z-50 p-4 space-y-1 w-64 min-h-full border-r menu bg-base-100 text-base-content border-base-300">
     <x-user />
     <li>
         <a href="{{ route('home') }}" wire:navigate @class(['active' => Route::is('home')])>
@@ -50,18 +50,17 @@
     </li>
 
     <li>
-        <details @if (Route::is(['restore-menus.index'])) open @endif>
-            <summary class="text-error">
-                <x-tabler-recycle class="size-5" />
-                Restore
-            </summary>
-            <ul>
-                @can('restore menus')
+        @can('restore menus')
+            <details @if (Route::is(['restore-menus.index'])) open @endif>
+                <summary class="text-error">
+                    <x-tabler-recycle class="size-5" />
+                    Restore
+                </summary>
+                <ul>
                     <li>
                         <a href="{{ route('restore-menus.index') }}" wire:navigate @class(['active' => Route::is('restore-menus.index')])>Menu</a>
                     </li>
-                @endcan
-                {{-- @can('index categories')
+                    {{-- @can('index categories')
                     <li>
                         <a href="{{ route('categories.index') }}" wire:navigate @class(['active' => Route::is('categories.index')])>Kategori</a>
                     </li>
@@ -80,8 +79,9 @@
                         </a>
                     </li>
                 @endcan --}}
-            </ul>
-        </details>
+                </ul>
+            </details>
+        @endcan
     </li>
 
     <li>

@@ -96,7 +96,7 @@
 
                         const speech = new SpeechSynthesisUtterance();
                         speech.text =
-                            `Pesanan atas nama ${customerName}, sudah siap, silahkan menuju loket order!`;
+                            `Pesanan atas nama ${customerName}, sudah siap!, silahkan menuju Kasir!`;
                         speech.lang = 'id-ID';
                         speech.volume = 1;
                         speech.rate = 0.8;

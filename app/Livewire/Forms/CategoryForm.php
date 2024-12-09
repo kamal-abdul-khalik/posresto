@@ -17,14 +17,15 @@ class CategoryForm extends Form
         $this->name = $category->name;
     }
 
-    public function store(): void
+    public function store(): CategoryMenu
     {
         $data = $this->validate([
             'name' => 'required|unique:category_menus,name,NULL,id',
         ]);
         $data['slug'] = Str::slug($this->name);
-        CategoryMenu::create($data);
+        $category = CategoryMenu::create($data);
         $this->reset();
+        return $category;
     }
     public function update(): void
     {

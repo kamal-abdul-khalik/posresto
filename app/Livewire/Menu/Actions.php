@@ -60,6 +60,20 @@ class Actions extends Component
         $this->warning('Menu masuk ke tempat sampah.');
     }
 
+    #[On('item-selected')]
+    public function handleItemSelected($data)
+    {
+        if ($data['wireModel'] === 'form.category_menu_id') {
+            $this->form->category_menu_id = $data['id'];
+        }
+    }
+
+    #[On('category-saved')]
+    public function handleCategorySaved($data)
+    {
+        $this->dispatch('item-saved', ['id' => $data['categoryId']]);
+    }
+
     public function closeModal(): void
     {
         $this->showModalForm = false;

@@ -21,17 +21,21 @@ class Actions extends Component
     #[On('customer-saved')]
     public function handleCustomerSaved($data)
     {
-        // Set the selected customer ID in the form
-        $this->form->customer_id = $data['customerId'];
-
-        // Reload customers list and ensure new customer is included
-        $this->customers = Customer::all();
+        $this->dispatch('item-saved', ['id' => $data['customerId']]);
     }
 
     #[On('customer-selected')]
     public function handleCustomerSelected($customerId)
     {
         $this->form->customer_id = $customerId;
+    }
+
+    #[On('item-selected')]
+    public function handleItemSelected($data)
+    {
+        if ($data['wireModel'] === 'form.customer_id') {
+            $this->form->customer_id = $data['id'];
+        }
     }
 
     public $items = [];

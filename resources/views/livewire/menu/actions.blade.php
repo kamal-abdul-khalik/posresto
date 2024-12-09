@@ -14,7 +14,9 @@
                 </div>
                 <x-input :label="'Nama Menu'" :type="'text'" :wire-model="'form.name'" :placeholder="'Ketikkan nama menu'" :error="$errors->first('form.name')" />
                 <x-input :label="'Harga'" :type="'number'" :wire-model="'form.price'" :placeholder="'Ketikkan harga menu'" :error="$errors->first('form.price')" />
-                <x-select :label="'Kategori'" :wire-model="'form.category_menu_id'" :error="$errors->first('form.category_menu_id')" :options="$categories" />
+                {{-- <x-select :label="'Kategori'" :wire-model="'form.category_menu_id'" :error="$errors->first('form.category_menu_id')" :options="$categories" /> --}}
+                <livewire:components.search-select :model-id="$form->category_menu_id" :model="'CategoryMenu'" :label="'Kategori'"
+                    :wire-model="'form.category_menu_id'" :error="$errors->first('form.category_menu_id')" :show-add-button="true" />
                 <x-textarea :label="'Keterangan'" :wire-model="'form.desc'" :placeholder="'Ketikkan keterangan menu'" :error="$errors->first('form.desc')"></x-textarea>
             </div>
             <div class="flex justify-between modal-actions">
@@ -28,5 +30,8 @@
                 </button>
             </div>
         </form>
+    </div>
+    <div>
+        @livewire('category.actions')
     </div>
 </div>

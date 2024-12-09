@@ -110,11 +110,9 @@
 
                         <!-- Transaction Form -->
                         <form class="mt-6 space-y-4" wire:submit="save">
-                            <livewire:components.customer-select :customer-id="$form->customer_id" />
-                            @error('form.customer_id')
-                                <span class="mt-2 text-xs text-error">{{ $message }}</span>
-                            @enderror
-
+                            {{-- <livewire:components.customer-select :customer-id="$form->customer_id" /> --}}
+                            <livewire:components.search-select :model-id="$form->customer_id" :model="'Customer'" :label="'Pelanggan'"
+                                :wire-model="'form.customer_id'" :error="$errors->first('form.customer_id')" :show-add-button="true" />
                             <x-textarea :label="'Keterangan'" :wire-model="'form.desc'" :placeholder="'Nomor meja atau keterangan lainnya'" :error="$errors->first('form.desc')" />
 
                             <!-- Total and Submit -->

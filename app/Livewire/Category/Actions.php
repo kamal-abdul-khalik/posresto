@@ -22,15 +22,27 @@ class Actions extends Component
         $this->showModalCategory = true;
     }
 
+    #[On('show-categorymenu-form')]
+    public function showForm(): void
+    {
+        $this->showModalCategory = true;
+    }
+
     public function save()
     {
         if (isset($this->form->category)) {
             $this->form->update();
+            $category = $this->form->category;
             $this->success('Category update successfully');
         } else {
-            $this->form->store();
+            $category = $this->form->store();
             $this->success('Category saved successfully');
         }
+        
+        $this->dispatch('item-saved', [
+            'id' => $category->id
+        ]);
+        
         $this->closeModal();
         $this->dispatch('reload');
     }

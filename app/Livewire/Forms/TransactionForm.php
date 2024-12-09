@@ -29,7 +29,7 @@ class TransactionForm extends Form
     public function store()
     {
         $data = $this->validate([
-            'customer_id' => '',
+            'customer_id' => 'required',
             'items' => 'required',
             'total' => 'required',
             'desc' => 'required',
@@ -43,7 +43,7 @@ class TransactionForm extends Form
     public function update()
     {
         $data = $this->validate([
-            'customer_id' => '',
+            'customer_id' => 'required',
             'items' => 'required',
             'total' => 'required',
             'desc' => 'required',

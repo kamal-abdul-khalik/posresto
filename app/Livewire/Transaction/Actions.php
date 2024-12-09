@@ -23,9 +23,15 @@ class Actions extends Component
     {
         // Set the selected customer ID in the form
         $this->form->customer_id = $data['customerId'];
-        
+
         // Reload customers list and ensure new customer is included
         $this->customers = Customer::all();
+    }
+
+    #[On('customer-selected')]
+    public function handleCustomerSelected($customerId)
+    {
+        $this->form->customer_id = $customerId;
     }
 
     public $items = [];
@@ -109,6 +115,7 @@ class Actions extends Component
             // Reset form
             $this->items = [];
             $this->form->reset();
+            $this->dispatch('transaction-processed');
         } catch (\Exception $e) {
             $this->error('Gagal menyimpan transaksi: ' . $e->getMessage());
         }

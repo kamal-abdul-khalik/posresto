@@ -110,8 +110,10 @@
 
                         <!-- Transaction Form -->
                         <form class="mt-6 space-y-4" wire:submit="save">
-                            <x-select-join :label="'Pelanggan'" :wire-model="'form.customer_id'" :error="$errors->first('form.customer_id')" :options="$customers"
-                                :placeholder="'Pilih Pelanggan'" :button-label="'+'" />
+                            <livewire:components.customer-select :customer-id="$form->customer_id" />
+                            @error('form.customer_id')
+                                <span class="mt-2 text-xs text-error">{{ $message }}</span>
+                            @enderror
 
                             <x-textarea :label="'Keterangan'" :wire-model="'form.desc'" :placeholder="'Nomor meja atau keterangan lainnya'" :error="$errors->first('form.desc')" />
 
